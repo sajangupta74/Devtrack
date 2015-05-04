@@ -10,6 +10,17 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require "bootstrap.min.css"
+ *= require "font-awesome.min.css"
+ *= require "style.css"
+ *= require "main.css"
+ *= require "main-responsive.css"
+
+ *= require "bootstrap-colorpalette.css"
+ *= require "perfect-scrollbar.css"
+
+
+
  *= require_tree .
  *= require_self
  */

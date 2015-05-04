@@ -7,12 +7,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # end
 
   def google_oauth2
-    render 'users/sessions/new'
+   # render 'users/sessions/new'
+    render template: 'index'
     @user = User.from_omniauth(request.env["omniauth.auth"])
     session[:user] = @user
-=begin
-    sign_in_and_redirect @user
-=end
   end
 
   # More info at:
