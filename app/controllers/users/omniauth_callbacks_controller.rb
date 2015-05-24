@@ -9,7 +9,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
    # render 'users/sessions/new'
     render template: 'index'
-    @user = User.from_omniauth(request.env["omniauth.auth"])
+    @user = User.from_google_auth(request.env["omniauth.auth"])
     session[:user] = @user
   end
 
