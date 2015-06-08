@@ -23,7 +23,7 @@ module DevTrack
 
     config.to_prepare do
       Devise::SessionsController.layout "login"
-      Devise::RegistrationsController.layout "your_layout_name"
+      Devise::RegistrationsController.layout "login"
       Devise::ConfirmationsController.layout "your_layout_name"
       Devise::UnlocksController.layout "your_layout_name"
       Devise::PasswordsController.layout "your_layout_name"
