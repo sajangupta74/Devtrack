@@ -1,7 +1,8 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-
+    load_and_authorize_resource only: [:new, :create, :update, :destroy, :edit]
+    load_and_authorize_resource except: [:index, :show]
   respond_to :html
 
   def index
