@@ -10,6 +10,7 @@ devise_for :users, controllers: { :omniauth_callbacks => "users/omniauth_callbac
                                   :devise_session => "users/sessions",
                                   :devise_registration => "users/registrations"}
 
+get '/index', to: 'main#index'
 
 mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 

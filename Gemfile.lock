@@ -106,6 +106,8 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rack (1.5.3)
     rack-pjax (0.8.0)
       nokogiri (~> 1.5)
@@ -200,6 +202,7 @@ DEPENDENCIES
   jquery-rails
   mysql2
   omniauth-google-oauth2
+  quiet_assets
   rails (= 4.1.6)
   rails_admin (~> 0.6.7)
   sass-rails (~> 4.0.3)
