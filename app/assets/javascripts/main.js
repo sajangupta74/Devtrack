@@ -553,12 +553,12 @@ var Main = function () {
     };
 
     //Window Resize Function
-    var runWIndowResize = function (func, threshold, execAsap) {
+    /*var runWIndowResize = function (func, threshold, execAsap) {
         //wait until the user is done resizing the window, then execute
         $(window).clipresize(function () {
             runElementsPosition();
         });
-    };
+    };*/
     //function to save user settings
     var runSaveSetting = function () {
         $('.save_style').bind('click', function () {
@@ -686,7 +686,7 @@ var Main = function () {
     return {
         //main function to initiate template pages
         init: function () {
-            runWIndowResize();
+            //runWIndowResize();
             runInit();
             runStyleSelector();
             runSearchInput();
