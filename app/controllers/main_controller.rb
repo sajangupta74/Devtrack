@@ -1,9 +1,9 @@
 class MainController < ApplicationController
 
   before_action :authenticate_user!
-
+  layout "controller_layouts" 
+  
   def index
-  	render layout: "controller_layouts" 
   end
 
 end

@@ -21,6 +21,9 @@ module DevTrack
     # config.i18n.default_locale = :de
     config.assets.paths << "#{Rails}/vendor/assets/fonts"
 
+    #precompiling assets
+    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+
     config.to_prepare do
       Devise::SessionsController.layout "login"
       Devise::RegistrationsController.layout "login"
