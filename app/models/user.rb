@@ -53,6 +53,5 @@ class User < ActiveRecord::Base
 
 end
 
-
 User.connection
 User.create_admin

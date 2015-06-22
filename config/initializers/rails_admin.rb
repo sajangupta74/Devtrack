@@ -10,15 +10,18 @@ RailsAdmin.config do |config|
 
 
    #Autherization manually
-   RailsAdmin.config do |config|
+=begin
+RailsAdmin.config do |config|
      config.authorize_with do |controller|
        redirect_to main_app.root_path unless warden.user.is_admin == 1  #current_user.try(:isadmin)
      end
    end
+=end
+
 
 
   ## == Cancan ==
-  # config.authorize_with :cancan
+  config.authorize_with :cancan
 
   ## == PaperTrail ==
   # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
