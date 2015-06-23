@@ -12,11 +12,3 @@
 //= require jquery.cookie.js
 //= require bootstrap-colorpalette.js
 //= require main.js
-//= require jquery.flot.js
-//= require jquery.flot.pie.js
-//= require jquery.flot.resize.min.js
-//= require jquery.sparkline.js
-//= require jquery.easy-pie-chart.js
-//= require jquery.ui.touch-punch.min.js
-//= require fullcalendar.js
-//= require index.js

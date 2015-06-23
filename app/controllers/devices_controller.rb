@@ -1,5 +1,6 @@
 class DevicesController < ApplicationController
 
+layout "controller_layouts"
 
 def index
 end
