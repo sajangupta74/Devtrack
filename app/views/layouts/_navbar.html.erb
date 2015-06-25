@@ -9,17 +9,18 @@
           <!-- end: MAIN MENU TOGGLER BUTTON -->
           <!-- start: MAIN NAVIGATION MENU -->
           <ul class="main-navigation-menu">
-            <li class="active open">              
-                <%= link_to '<i class="clip-home-3"></i> Dashboard'.html_safe, main_path, class: "selected" %> 
+            <li class="<%= controller.controller_name == "main" ? "active open" : "" %>">                              
+                <%= link_to '<i class="clip-home-3"></i> Dashboard'.html_safe, main_path, :class => (controller.controller_name == "main" ? "selected" : "") %>                 
             </li>
-            <li>
+            <li class="<%= controller.controller_name == "devices" ? "active open" : "" %>" >
+            
               <a href="javascript:void(0)"><i class="clip-screen"></i>
                 <span class="title"> Devices </span><i class="icon-arrow"></i>
-                <span class="selected"></span>
+                <span class="selected"></span>                
               </a>
               <ul class="sub-menu">
-                <li>                  
-                  <a href= '<%= devices_path %>' ><i class="clip-list"></i>
+                <li class="<%= controller.action_name == "index" ? "active open" : "" %>">                  
+                  <a href= '<%= devices_path %>'><i class="clip-list"></i>
                     <span class="title"> Devices List </span>
                   </a>              
                 </li>
