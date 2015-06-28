@@ -11,18 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150531044638) do
+ActiveRecord::Schema.define(version: 20150628103253) do
 
   create_table "devices", force: true do |t|
     t.string   "name"
     t.string   "device_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "status_id"
+    t.integer  "time"
   end
 
   create_table "products", force: true do |t|
     t.string   "name"
     t.integer  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "statuses", force: true do |t|
+    t.string   "status_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -48,7 +57,7 @@ ActiveRecord::Schema.define(version: 20150531044638) do
     t.string   "city"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
