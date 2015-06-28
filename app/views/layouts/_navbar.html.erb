@@ -9,43 +9,26 @@
           <!-- end: MAIN MENU TOGGLER BUTTON -->
           <!-- start: MAIN NAVIGATION MENU -->
           <ul class="main-navigation-menu">
-            <li class="active open">
-              <a href="index.html"><i class="clip-home-3"></i>
-                <span class="title"> Dashboard </span><span class="selected"></span>
-              </a>
+            <li class="<%= controller.controller_name == "main" ? "active open" : "" %>">                              
+                <%= link_to '<i class="clip-home-3"></i> Dashboard'.html_safe, main_path, :class => (controller.controller_name == "main" ? "selected" : "") %>                 
             </li>
-            <li>
+            <li class="<%= controller.controller_name == "devices" ? "active open" : "" %>" >
+            
               <a href="javascript:void(0)"><i class="clip-screen"></i>
-                <span class="title"> Layouts </span><i class="icon-arrow"></i>
-                <span class="selected"></span>
+                <span class="title"> Devices </span><i class="icon-arrow"></i>
+                <span class="selected"></span>                
               </a>
               <ul class="sub-menu">
-                <li>
-                  <a href="layouts_horizontal_menu1.html">
-                    <span class="title"> Horizontal Menu </span>
-                    <span class="badge badge-new">new</span>
-                  </a>
+                <li class="<%= controller.action_name == "index" ? "active open" : "" %>">                  
+                  <a href= '<%= devices_path %>'><i class="clip-list"></i>
+                    <span class="title"> Devices List </span>
+                  </a>              
                 </li>
                 <li>
-                  <a href="layouts_sidebar_closed.html">
-                    <span class="title"> Sidebar Closed </span>
+                  <a href="layouts_sidebar_closed.html"><i class="clip-spinner-2"></i>
+                    <span class="title"> Issued Devices </span>
                   </a>
-                </li>
-                <li>
-                  <a href="layouts_boxed_layout.html">
-                    <span class="title"> Boxed Layout </span>
-                  </a>
-                </li>
-                <li>
-                  <a href="layouts_footer_fixed.html">
-                    <span class="title"> Footer Fixed </span>
-                  </a>
-                </li>
-                <li>
-                  <a href="../clip-one-rtl/index.html">
-                    <span class="title"> RTL Version </span>
-                  </a>
-                </li>
+                </li>                
               </ul>
             </li>
             <li>

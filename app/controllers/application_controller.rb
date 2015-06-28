@@ -18,7 +18,7 @@ end
 
   def after_sign_in_path_for(dashboard)
     # return the path based on resource
-    products_path
+    main_path
   end
 
   # Overwriting the sign_out redirect path method
