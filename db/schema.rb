@@ -11,18 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150531044638) do
+ActiveRecord::Schema.define(version: 20150628125735) do
+
+  create_table "device_queues", force: true do |t|
+    t.integer  "device_id"
+    t.integer  "user_id"
+    t.integer  "status_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "devices", force: true do |t|
     t.string   "name"
     t.string   "device_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "status_id"
+    t.integer  "time"
   end
 
   create_table "products", force: true do |t|
     t.string   "name"
     t.integer  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "statuses", force: true do |t|
+    t.string   "status_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

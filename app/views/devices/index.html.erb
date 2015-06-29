@@ -75,7 +75,7 @@
 													<th>Device Name</th>
 													<th>Type</th>
 													<th>User</th>
-													<th><i class="fa fa-time"></i>Time</th>
+													<th><i class="fa fa-time"></i>Slug</th>
 													<th>Status</th>
 												</tr>
 											</thead>
@@ -87,159 +87,19 @@
 															<input type="checkbox" class="flat-grey">
 														</label>
 													</div></td>
-													<td>
-													<a href="#">
-														alpha.com
-													</a></td>
-													<td>$45</td>
-													<td>3,330</td>
-													<td>Feb 13</td>
-													<td><span class="label label-sm label-warning">Expiring</span></td>
-												</tr>
-												<tr>
-													<td class="center">
-													<div class="checkbox-table">
-														<label>
-															<input type="checkbox" class="flat-grey">
-														</label>
-													</div></td>
-													<td>
-													<a href="#">
-														beta.com
-													</a></td>
-													<td>$70</td>
-													<td>3,330</td>
-													<td>Jen 15</td>
-													<td><span class="label label-sm label-success">Registered</span></td>
-												</tr>
-												<tr>
-													<td class="center">
-													<div class="checkbox-table">
-														<label>
-															<input type="checkbox" class="flat-grey">
-														</label>
-													</div></td>
-													<td>
-													<a href="#">
-														gamma.com
-													</a></td>
-													<td>$25</td>
-													<td>3,330</td>
-													<td>Mar 09</td>
-													<td><span class="label label-sm label-danger">Expired</span></td>
-												</tr>
-												<tr>
-													<td class="center">
-													<div class="checkbox-table">
-														<label>
-															<input type="checkbox" class="flat-grey">
-														</label>
-													</div></td>
-													<td>
-													<a href="#">
-														delta.com
-													</a></td>
-													<td>$50</td>
-													<td>3,330</td>
-													<td>Feb 10</td>
-													<td><span class="label label-sm label-inverse">Flagged</span></td>
-												</tr>
-												<tr>
-													<td class="center">
-													<div class="checkbox-table">
-														<label>
-															<input type="checkbox" class="flat-grey">
-														</label>
-													</div></td>
-													<td>
-													<a href="#">
-														epsilon.com
-													</a></td>
-													<td>$35</td>
-													<td>3,330</td>
-													<td>Feb 18</td>
-													<td><span class="label label-sm label-success">Registered</span></td>
-												</tr>
-												<tr>
-													<td class="center">
-													<div class="checkbox-table">
-														<label>
-															<input type="checkbox" class="flat-grey">
-														</label>
-													</div></td>
-													<td>
-													<a href="#">
-														zeta.com
-													</a></td>
-													<td>$45</td>
-													<td>3,330</td>
-													<td>Feb 13</td>
-													<td><span class="label label-sm label-warning">Expiring</span></td>
-												</tr>
-												<tr>
-													<td class="center">
-													<div class="checkbox-table">
-														<label>
-															<input type="checkbox" class="flat-grey">
-														</label>
-													</div></td>
-													<td>
-													<a href="#">
-														eta.com
-													</a></td>
-													<td>$70</td>
-													<td>3,330</td>
-													<td>Jen 15</td>
-													<td><span class="label label-sm label-success">Registered</span></td>
-												</tr>
-												<tr>
-													<td class="center">
-													<div class="checkbox-table">
-														<label>
-															<input type="checkbox" class="flat-grey">
-														</label>
-													</div></td>
-													<td>
-													<a href="#">
-														theta.com
-													</a></td>
-													<td>$25</td>
-													<td>3,330</td>
-													<td>Mar 09</td>
-													<td><span class="label label-sm label-danger">Expired</span></td>
-												</tr>
-												<tr>
-													<td class="center">
-													<div class="checkbox-table">
-														<label>
-															<input type="checkbox" class="flat-grey">
-														</label>
-													</div></td>
-													<td>
-													<a href="#">
-														iota.com
-													</a></td>
-													<td>$50</td>
-													<td>3,330</td>
-													<td>Feb 10</td>
-													<td><span class="label label-sm label-inverse">Flagged</span></td>
-												</tr>
-												<tr>
-													<td class="center">
-													<div class="checkbox-table">
-														<label>
-															<input type="checkbox" class="flat-grey">
-														</label>
-													</div></td>
-													<td>
-													<a href="#">
-														kappa.com
-													</a></td>
-													<td>$35</td>
-													<td>3,330</td>
-													<td>Feb 18</td>
-													<td><span class="label label-sm label-success">Registered</span></td>
-												</tr>
+													<% if @devices != nil %>
+														<% @devices.each do |d| %>
+															<td>
+															<a href="<%= device_path %>">
+																<%= d.name %>
+															</a></td>
+															<td> <%= d.device_type %> </td>
+															<td>3,330</td>
+															<td>Feb 13</td>
+															<td><span class="label label-sm label-warning">Expiring</span></td>
+															</tr>
+														<% end %>
+													<% end %>
 											</tbody>
 										</table>
 									</div>

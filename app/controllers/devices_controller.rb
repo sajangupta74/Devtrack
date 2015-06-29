@@ -3,9 +3,10 @@ class DevicesController < ApplicationController
 layout "controller_layouts"
 
 def index
+	@devices=Device.all
 end
 
-def show 	
+def show 		
 end
 
 def new
