@@ -19,7 +19,7 @@
                 <span class="selected"></span>                
               </a>
               <ul class="sub-menu">
-                <li class="<%= controller.action_name == "index" ? "active open" : "" %>">                  
+                <li class="<%= (controller.controller_name == "devices" && controller.action_name == "index") ? "active open" : "" %>">                  
                   <a href= '<%= devices_path %>'><i class="clip-list"></i>
                     <span class="title"> Devices List </span>
                   </a>              

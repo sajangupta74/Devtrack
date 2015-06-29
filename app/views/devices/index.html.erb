@@ -90,13 +90,13 @@
 													<% if @devices != nil %>
 														<% @devices.each do |d| %>
 															<td>
-															<a href="<%= device_path %>">
+															<a href="<%= device_path(d.id) %>">
 																<%= d.name %>
 															</a></td>
 															<td> <%= d.device_type %> </td>
 															<td>3,330</td>
 															<td>Feb 13</td>
-															<td><span class="label label-sm label-warning">Expiring</span></td>
+															<td><span class="label label-sm label-warning">Available</span></td>
 															</tr>
 														<% end %>
 													<% end %>
