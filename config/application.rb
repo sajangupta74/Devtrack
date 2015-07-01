@@ -32,5 +32,8 @@ module DevTrack
       Devise::PasswordsController.layout "your_layout_name"
     end
 
+    config.time_zone = 'Kolkata'
+    config.active_record.default_timezone = :local
+
   end
 end
