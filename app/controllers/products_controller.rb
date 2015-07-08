@@ -23,9 +23,12 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(product_params)
+
+@product = Product.new(product_params)
     flash[:notice] = 'Product was successfully created.' if @product.save
     respond_with(@product)
+
+  puts params[:product].inspect
   end
 
   def update

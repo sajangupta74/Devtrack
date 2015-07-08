@@ -35,5 +35,7 @@ module DevTrack
     config.time_zone = 'Kolkata'
     config.active_record.default_timezone = :local
 
+    config.autoload_paths += %W(#{config.root}/lib/jquery-1.3.2.js)
+
   end
 end

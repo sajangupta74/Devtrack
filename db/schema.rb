@@ -11,12 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150628125735) do
+ActiveRecord::Schema.define(version: 20150707072508) do
 
   create_table "device_queues", force: true do |t|
     t.integer  "device_id"
     t.integer  "user_id"
     t.string   "time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "device_types", force: true do |t|
+    t.string   "device_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
