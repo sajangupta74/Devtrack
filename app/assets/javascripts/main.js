@@ -683,6 +683,20 @@ var Main = function () {
         $('.color-text').val('#555555').next('.dropdown').find('i').css('background-color', '#555555');
         $('.color-badge').val('#007AFF').next('.dropdown').find('i').css('background-color', '#007AFF');
     };
+
+    //function for custom drop down menu
+    var runCustomDropDown = function () {
+        $(".custom-select").each(function(){
+            $(this).wrap( "<span class='select-wrapper'></span>" );
+            $(this).after("<span class='holder'></span>");
+        });
+        $(".custom-select").change(function(){
+            var selectedOption = $(this).find(":selected").text();
+            $(this).next(".holder").text(selectedOption);
+        }).trigger('change');
+    };    
+
+
     return {
         //main function to initiate template pages
         init: function () {
@@ -707,6 +721,7 @@ var Main = function () {
             runSaveSetting();
             runCustomSetting();
             runClearSetting();
+            runCustomDropDown();
         }
     };
 }();

@@ -88,11 +88,78 @@
 										</a>
 									</div>
 								</div>
-								
+								<div class="panel-body">
+									<h2><i class="fa fa-pencil-square teal"></i> REGISTER</h2>
+									<p>
+										Create one account to manage everything you do with ClipOne, from your shopping preferences to your ClipOne activity.
+									</p>
+									<hr>
+									<form action="<%= devices_path %>" method="POST" role="form" id="new_device">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="errorHandler alert alert-danger no-display">
+													<i class="fa fa-times-sign"></i> You have some form errors. Please check below.
+												</div>
+												<div class="successHandler alert alert-success no-display">
+													<i class="fa fa-ok"></i> Your form validation is successful!
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">
+														Name <span class="symbol required"></span>
+													</label>
+													<input type="text" placeholder="Insert Device Name" class="form-control" id="name" name="device[name]">
+												</div>
+												<div class="form-group">
+													<label class="control-label">
+														Slug <span class="symbol required"></span>
+													</label>
+													<input type="text" placeholder="Insert Slug" class="form-control" id="slug" name="device[slug]">
+												</div>												
+												
+												<!-- drop down menu -->
 
-								<%= render 'form' %>
+												<div class="form-group">
+													<label class="control-label">
+														Slug <span class="symbol required"></span>
+													</label>
+													<div class="select-style">
+													  <select name="device[device_type]">
+													  
+													    <option value="<%= @device_type[0] %>"><%= @device_type[0].capitalize %></option>
+													    <option value="<%= @device_type[1] %>"><%= @device_type[1].capitalize %></option>
+													    <option value="<%= @device_type[2] %>"><%= @device_type[2].capitalize %></option>
+													    
+													  </select>
+													</div>
+												</div>
 
-
+											</div>											
+										</div>
+												</br></br></br>
+										<div class="row">
+											<div class="col-md-12">
+												<div>
+													<span class="symbol required"></span>Required Fields
+													<hr>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-8">
+												<p>
+													By clicking REGISTER, you are agreeing to the Policy and Terms &amp; Conditions.
+												</p>
+											</div>
+											<div class="col-md-4">
+												<button class="btn btn-yellow btn-block" type="submit" action="<%= devices_path(params[:id], :method => :POST) %>">
+													Register <i class="fa fa-arrow-circle-right"></i>
+												</button>
+											</div>
+										</div>
+									</form>
+								</div>
 							</div>
 							<!-- end: FORM VALIDATION 1 PANEL -->
 						</div>

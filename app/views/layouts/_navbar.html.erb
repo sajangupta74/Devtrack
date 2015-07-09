@@ -19,14 +19,14 @@
                 <span class="selected"></span>                
               </a>
               <ul class="sub-menu">
-                <li class="<%= controller.action_name == "index" ? "active open" : "" %>">                  
+                <li class="<%= (controller.controller_name == "devices" && controller.action_name == "index") ? "active open" : "" %>">                  
                   <a href= '<%= devices_path %>'><i class="clip-list"></i>
                     <span class="title"> Devices List </span>
                   </a>              
                 </li>
                 <li>
-                  <a href="layouts_sidebar_closed.html"><i class="clip-spinner-2"></i>
-                    <span class="title"> Issued Devices </span>
+                  <a href="<%= new_device_path %>"><i class="clip-spinner-2"></i>
+                    <span class="title"> Create Devices </span>
                   </a>
                 </li>                
               </ul>

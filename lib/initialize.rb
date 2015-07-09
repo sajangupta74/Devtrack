@@ -17,3 +17,9 @@
 	puts ">Generating admin"
 	User.connection
 	User.create_admin
+
+
+#calling method to seed devicetype table
+	puts ">Generating devicetype"
+	DeviceType.connection
+	DeviceType.create_device_types
