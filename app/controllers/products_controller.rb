@@ -3,15 +3,14 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!
     load_and_authorize_resource only: [:new, :create, :update, :destroy, :edit]
     load_and_authorize_resource except: [:index, :show]
-  respond_to :html
+  respond_to :html, :js
 
   def index
     @products = Product.all
-    respond_with(@products)
   end
 
   def show
-    respond_with(@product)
+    
   end
 
   def new
@@ -24,11 +23,10 @@ class ProductsController < ApplicationController
 
   def create
 
-@product = Product.new(product_params)
+    @product = Product.new(product_params)
     flash[:notice] = 'Product was successfully created.' if @product.save
     respond_with(@product)
 
-  puts params[:product].inspect
   end
 
   def update
@@ -38,7 +36,12 @@ class ProductsController < ApplicationController
 
   def destroy
     @product.destroy
-    respond_with(@product)
+    @products = Product.all
+
+    respond_to do |format|
+      format.js
+    end
+
   end
 
   private
