@@ -21,5 +21,6 @@
  *= require "theme_light.css"
  
  *= require "fullcalendar.css"
-
+ *= require "bootstrap-modal-bs3patch.css"
+ *= require "bootstrap-modal.css"
  */

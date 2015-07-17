@@ -66,38 +66,26 @@
 										<table class="table table-bordered table-hover" id="sample-table-1">
 											<thead>
 												<tr>
-													<th class="center">
-													<div class="checkbox-table">
-														<label>
-															<input type="checkbox" class="flat-grey">
-														</label>
-													</div></th>
+													
 													<th>Device Name</th>
 													<th>Type</th>
 													<th>User</th>
 													<th><i class="fa fa-time"></i>Slug</th>
-													<th>Status</th>
+													<th class="center">Status</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr>
 												<% if @devices != nil %>
-														<% @devices.each do |d| %>
-													<td class="center">
-													<div class="checkbox-table">
-														<label>
-															<input type="checkbox" class="flat-grey">
-														</label>
-													</div></td>
-													
+														<% @devices.each do |d| %>		
 															<td>
-															<a href="<%= device_path(d.id) %>">
+															<a data-device_id="<%= d.id %>" id="device_id" class="device_link" href="#">
 																<%= d.name %>
 															</a></td>
 															<td> <%= d.device_type.capitalize %> </td>
 															<td>3,330</td>
 															<td>Feb 13</td>
-															<td><span class="label label-sm label-warning">Available</span></td>
+															<td class="center"><span class="label label-sm label-warning">Available</span></td>		
 															</tr>
 														<% end %>
 													<% end %>
@@ -111,11 +99,77 @@
 					</div>
 				</div>
 			</div>
+
+			<div id="responsive" class="modal fade" tabindex="-1" data-width="760" style="display: block;">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title">Device Request</h4>
+				</div>
+				
+				<div class="modal-body">
+					<div class="row">
+						<div class="form-horizontal">
+							<div class="form-group">
+									<label class="col-sm-2 control-label"> Device name</label>
+								<div class="col-sm-2">	
+									<input type="text" value="device[name]" class="form-control" id="name" name="device[name]" disabled>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label"> Slug</label>
+									<div class="col-sm-2">	
+										<input type="text" value="device[slug]" class="form-control" id="name" name="device[name]" disabled>
+									</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label"> Device Type</label>
+								<div class="col-sm-2">	
+									<input type="text" value="device[device_type]" class="form-control" id="name" name="device[name]" disabled>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" data-dismiss="modal" class="btn btn-light-grey">
+						Close
+					</button>
+
+					<button id="req" type="button" data-dismiss="modal" class="btn btn-blue req" data-remote="true" action="<%= main_path %>">
+						Apply
+					</button>
+					
+					
+
+				</div>
+			</div>
 			
+			<div id="ajax-modal" class="modal fade" tabindex="-1" style="display: none;"></div>
+			
+
+
+
+
+
+
+
+
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 			<script>
 				$(document).ready(function() {
 					Main.init();
+					UIModals.init();
+$('.device_link').on('click', function() {
+	$('#responsive').modal('show');
+var device_id=$(this).data("device_id");
+alert(device_id);
+});
+
 				});
 			</script>
