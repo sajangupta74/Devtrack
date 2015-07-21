@@ -49,6 +49,7 @@ gem "omniauth-google-oauth2"
 
 group :development do
   gem "better_errors"
+  gem "json"
 end
 
 gem "binding_of_caller"

@@ -1,6 +1,36 @@
-$('.device_link').on('click', function() {
-	$('#responsive').modal('show');
-var device_id=$(this).data("device_id");
-alert(device_id);
-});
+$(document).ready(function(){
+$(".device_link").on("click",function(){
+'use strict';
+	var device_id = $(this).attr("data-device-id");
+	
+	console.log('getdevice/'+device_id);
+	$.ajax(
 
+		{
+			url: '/getdevice/'+device_id,
+
+			data: { id: device_id},
+
+			type: "GET",
+
+			datatype: "json",
+
+			success: function( json ) {
+				$("#device_name").val(json.name);
+				$("#device_type").val(json.device_type);
+				$("#slug").val(json.slug);
+				$("#responsive").modal("show");
+    		},
+
+    		error: function() {
+    			
+		    },
+ 
+		    // Code to run regardless of success or failure
+		    complete: function( xhr, status ) {
+		        	console.log( "The request is complete!" );
+		    	}
+		}
+	);
+});
+});
