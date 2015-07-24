@@ -79,14 +79,22 @@
 												<% if @devices != nil %>
 														<% @devices.each do |d| %>		
 												<td>
-													<a data-device-id="<%= d.id %>" id="device_id" class="device_link" data-remote="true">
+													<a data-remote="true" data-device-id="<%= d.id %>" id="device_id" class="device_link" >
                                 					<%= d.name %>
                               						</a>
 												</td>
 															<td> <%= d.device_type.capitalize %> </td>
 															<td>3,330</td>
 															<td>Feb 13</td>
-															<td class="center"><span class="label label-sm label-warning">Available</span></td>		
+															<td class="center">
+															<% if d.status_id == 1 %>
+															<span class="label label-sm label-success">Available</span>
+															<% elsif d.status_id == 2 %>
+															<span class="label label-sm label-inverse">Un-available</span>
+															<% else %>
+															<span class="label label-sm label-danger">Using</span>
+															<% end %>
+															</td>		
 															</tr>
 														<% end %>
 													<% end %>

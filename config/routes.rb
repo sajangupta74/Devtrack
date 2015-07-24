@@ -11,7 +11,8 @@ devise_for :users, controllers: { :omniauth_callbacks => "users/omniauth_callbac
                                   :devise_registration => "users/registrations"}
 
 get '/index', to: 'main#index', as: 'main'
-get '/getdevice/:id', to: 'main#assign_device', as: 'getdevice'
+post '/getdevice/:id', to: 'main#get_device', as: 'getdevice'
+post '/assigndevice/:id', to: 'main#assign_device', as: 'assigndevice'
 
 mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 

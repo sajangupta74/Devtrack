@@ -10,7 +10,7 @@ class MainController < ApplicationController
   	end
   end
 
-  def assign_device
+  def get_device
   
     id=params[:id]
     @device=Device.find(id)
@@ -19,7 +19,14 @@ class MainController < ApplicationController
         format.json {render json: @device}
       end
     end
+  end
 
+  def assign_device
+    id=params[:id]
+    puts "#{id} #{id.class}"
+    device=Device.find(id)
+    DeviceQueue.create(device_id: device_id, user_id: current_user, time: Time.now)
+    device.update(status_id: 3)
   end
 
 end

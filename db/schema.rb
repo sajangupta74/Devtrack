@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(version: 20150707072508) do
   create_table "device_queues", force: true do |t|
     t.integer  "device_id"
     t.integer  "user_id"
-    t.string   "time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -31,7 +30,7 @@ ActiveRecord::Schema.define(version: 20150707072508) do
     t.string   "name"
     t.string   "device_type"
     t.string   "slug"
-    t.string   "status_id"
+    t.integer  "status_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
