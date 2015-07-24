@@ -1,6 +1,6 @@
 class DevicesController < ApplicationController
 
-	#before_action :authenticate_user!
+	before_action :authenticate_user!
 	layout "controller_layouts"
 	before_action :define
 

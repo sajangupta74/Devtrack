@@ -3,7 +3,7 @@ class CreateDeviceQueues < ActiveRecord::Migration
     create_table :device_queues do |t|
       t.integer :device_id
       t.integer :user_id
-      t.timestamps :time
+      t.timestamp :time
 
       t.timestamps
     end
