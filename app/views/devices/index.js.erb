@@ -1,40 +1,42 @@
 $(document).ready(function(){
 	
 	var device_id;
+
+
 //getting device data
-	$(".device_link").on("click",function(){
+		$(".device_link").on("click",function(){
 
-		device_id = $(this).attr("data-device-id");
-		
-		$.ajax(
+			device_id = $(this).attr("data-device-id");
+			
+			$.ajax(
 
-			{
-				url: '/getdevice/'+device_id,
+				{
+					url: '/getdevice/'+device_id,
 
-				data: { id: device_id},
+					data: { id: device_id},
 
-				type: "POST",
+					type: "POST",
 
-				datatype: "json",
+					datatype: "json",
 
-				success: function( json ) {
-					$("#device_name").val(json.name);
-					$("#device_type").val(json.device_type);
-					$("#slug").val(json.slug);
-					$("#responsive").modal("show");
-	    		},
+					success: function( json ) {
+						$("#device_name").val(json.name);
+						$("#device_type").val(json.device_type);
+						$("#slug").val(json.slug);
+						$("#responsive").modal("show");
+		    		},
 
-	    		error: function(xhr, status, errorThrown) {
-	    			console.log("error: " +errorThrown);
-			    },
-	 
-			    // Code to run regardless of success or failure
-			    complete: function( xhr, status ) {
-			        	console.log( "The request is complete!" );
-			    	}
-			}
-		);
-	});
+		    		error: function(xhr, status, errorThrown) {
+		    			console.log("error: " +errorThrown);
+				    },
+		 
+				    // Code to run regardless of success or failure
+				    complete: function( xhr, status ) {
+				        	console.log( "The request is complete!" );
+				    	}
+				}
+			);
+		});
 
 //assinging device to user
 	$(".req").on("click", function(){
@@ -51,6 +53,8 @@ $(document).ready(function(){
 
 				success: function( json ) {
 					$("#responsive").modal("hide");
+					var tag=$("#tag_id_"+device_id).find("span");
+					tag.text("Using").addClass("label label-sm label-danger");
 	    		},
 
 	    		error: function(xhr, status, errorThrown) {

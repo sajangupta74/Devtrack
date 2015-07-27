@@ -62,7 +62,7 @@
 									</div>
 								</div>
 								<div class="panel-body">
-									<div class="table-responsive">
+									<div class="table-responsive" id="main-form">
 										<table class="table table-bordered table-hover" id="sample-table-1">
 											<thead>
 												<tr>
@@ -78,21 +78,29 @@
 												<tr>
 												<% if @devices != nil %>
 														<% @devices.each do |d| %>		
-												<td>
-													<a data-remote="true" data-device-id="<%= d.id %>" id="device_id" class="device_link" >
+												<td id="device_id-<%=d.id%>">
+													<a data-remote="true" data-device-id="<%= d.id %>" id="device_id_<%=d.id%>" class="device_link" >
                                 					<%= d.name %>
                               						</a>
 												</td>
 															<td> <%= d.device_type.capitalize %> </td>
-															<td>3,330</td>
-															<td>Feb 13</td>
-															<td class="center">
+															<td>
+																<% if d.status_id == 1 %>
+																<%= "Admin" %>
+																<% elsif d.status_id == 3 %>
+																<% user_id=DeviceQueue.find_by(device_id=d.id).user_id %>
+																<% email=User.find(user_id).email %>
+																<%= email %>
+																<% end %>
+															</td>
+															<td><%= d.slug %></td>
+															<td class="center" id="tag_id_<%=d.id%>">
 															<% if d.status_id == 1 %>
-															<span class="label label-sm label-success">Available</span>
+															<span class="label label-sm label-success" >Available</span>
 															<% elsif d.status_id == 2 %>
-															<span class="label label-sm label-inverse">Un-available</span>
+															<span class="label label-sm label-inverse" >Un-available</span>
 															<% else %>
-															<span class="label label-sm label-danger">Using</span>
+															<span class="label label-sm label-danger" >Using</span>
 															<% end %>
 															</td>		
 															</tr>

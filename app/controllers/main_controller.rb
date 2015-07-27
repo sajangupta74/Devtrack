@@ -25,10 +25,11 @@ class MainController < ApplicationController
     id=params[:id].to_i
     puts "#{id} #{id.class}"
     device=Device.find(id)
-    DeviceQueue.create(device_id: id, user_id: current_user)
+    DeviceQueue.create(device_id: id, user_id: current_user.id)
     device.update(status_id: 3)
+    @user_id=User.joins(:DeviceQueue).find_by(device_id=id).email
     respond_to do |format|
-        format.json {render json: {"message" => "success"}}
+        format.json {render json: {"device_data" => device, "user_id" => @user_id} }
     end
   end
 

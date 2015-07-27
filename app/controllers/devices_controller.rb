@@ -6,6 +6,7 @@ class DevicesController < ApplicationController
 
 	def index
 		@devices=Device.all
+		@devices_users=User.joins(:DeviceQueue)
 	end
 
 	def show 		

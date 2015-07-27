@@ -259,6 +259,6 @@ Devise.setup do |config|
 
   config.scoped_views = true
 
-  config.omniauth :google_oauth2, "588609301404-9g9sg2ps92qp5hedgmfprljelbi2a1ju.apps.googleusercontent.com", "_uCoVViT-lw76ylxY8Bb0gUm"
+  config.omniauth :google_oauth2, "588609301404-9g9sg2ps92qp5hedgmfprljelbi2a1ju.apps.googleusercontent.com", "_uCoVViT-lw76ylxY8Bb0gUm", provider_ignores_state: true
 
 end
