@@ -7,7 +7,48 @@ class DevicesController < ApplicationController
 	def index
 		@devices=Device.all
 		@devices_users=User.joins(:DeviceQueue)
+		@assign_devices=DeviceQueue.all
+		@current_user=current_user
 	end
+
+	  def get_device
+  
+	    id=params[:id]
+	    @device=Device.find(id)
+	    if @device != nil
+	    	if @device.status_id === 1
+		      respond_to do |format|
+		        format.json {render json: { "data" => @device, "message" => "success" } }
+		      end
+		  	else
+		  	  respond_to do |format|
+		        format.json {render json: {"message" => "Device already in use"} }
+		      end
+		  	end
+	    end
+	  end
+
+	  def assign_device
+	    id=params[:id].to_i
+	    puts "#{id} #{id.class}"
+	    device=Device.find(id)
+	    if device.status_id == 1
+	    	DeviceQueue.create(device_id: id, user_id: current_user.id, time: Time.now)
+	    	device.update(status_id: 3)
+	    	@user_id=User.joins(:DeviceQueue).find_by(device_id=id).email
+	    	
+	    	respond_to do |format|
+	        	format.json {render json: {"device_data" => device, "user_id" => @user_id, "message" => "success"} }
+	    	end
+	    else
+	    	respond_to do |format|
+	        	format.json {render json: {"message" => "Device already in use"} }
+	    	end
+	    end
+
+	    
+	  end
+
 
 	def show 		
 	end

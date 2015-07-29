@@ -1,0 +1,17 @@
+//= require jquery
+//= require jquery_ujs
+//= require turbolinks
+//= require jquery-ui-1.10.2.custom.min.js
+//= require bootstrap.min.js
+//= require bootstrap-hover-dropdown.min.js
+//= require jquery.blockUI.js
+//= require jquery.icheck.min.js
+//= require jquery.mousewheel.js
+//= require perfect-scrollbar.js
+//= require less-1.5.0.min.js
+//= require jquery.cookie.js
+//= require bootstrap-colorpalette.js
+//= require main.js
+//= bootstrap-fileupload.min.js
+//= jquery.pulsate.min.js
+//= pages-user-profile.js

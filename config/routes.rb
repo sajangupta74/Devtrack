@@ -11,8 +11,10 @@ devise_for :users, controllers: { :omniauth_callbacks => "users/omniauth_callbac
                                   :devise_registration => "users/registrations"}
 
 get '/index', to: 'main#index', as: 'main'
-post '/getdevice/:id', to: 'main#get_device', as: 'getdevice'
-post '/assigndevice/:id', to: 'main#assign_device', as: 'assigndevice'
+post '/getdevice/:id', to: 'devices#get_device', as: 'getdevice'
+post '/assigndevice/:id', to: 'devices#assign_device', as: 'assigndevice'
+
+get '/users/info', to: 'user_info#overview', as: 'userinfo'
 
 mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 

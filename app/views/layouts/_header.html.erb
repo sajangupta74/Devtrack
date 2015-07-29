@@ -337,21 +337,7 @@
   </a>
   <ul class="dropdown-menu">
     <li>
-      <a href="pages_user_profile.html">
-        <i class="clip-user-2"></i>
-        &nbsp;My Profile
-      </a>
-    </li>
-    <li>
-      <a href="pages_calendar.html">
-        <i class="clip-calendar"></i>
-        &nbsp;My Calendar
-      </a>
-    <li>
-      <a href="pages_messages.html">
-        <i class="clip-bubble-4"></i>
-        &nbsp;My Messages (3)
-      </a>
+      <%= link_to " My Profile", userinfo_path, class: "clip-user-2" %>
     </li>
     <li class="divider"></li>
     <li>
@@ -359,10 +345,7 @@
         &nbsp;Lock Screen </a>
     </li>
     <li>
-      <a href="login_example1.html">
-        <i class="clip-exit"></i>
-        &nbsp;Log Out
-      </a>
+    <%= link_to " Log Out", destroy_user_session_path, method: :delete, class:  "clip-exit" %>
     </li>
   </ul>
 </li>

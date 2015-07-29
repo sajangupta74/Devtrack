@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   has_many :DeviceQueue
-
+  has_one :UserInfo
 
   def self.from_google_auth(auth)
     #last_id = User.last.id

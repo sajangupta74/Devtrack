@@ -79,18 +79,24 @@
 												<% if @devices != nil %>
 														<% @devices.each do |d| %>		
 												<td id="device_id-<%=d.id%>">
-													<a data-remote="true" data-device-id="<%= d.id %>" id="device_id_<%=d.id%>" class="device_link" >
+													<a  data-remote="true" data-device-id="<%= d.id %>" id="device_id_<%=d.id%>" class="device_link" >
                                 					<%= d.name %>
                               						</a>
 												</td>
 															<td> <%= d.device_type.capitalize %> </td>
-															<td>
+
+															<td id="email_id_<%=d.id%>">
+
 																<% if d.status_id == 1 %>
-																<%= "Admin" %>
-																<% elsif d.status_id == 3 %>
-																<% user_id=DeviceQueue.find_by(device_id=d.id).user_id %>
-																<% email=User.find(user_id).email %>
-																<%= email %>
+																	<%= "Admin" %>
+																	<% elsif d.status_id == 3 %>
+																	<% user_id=DeviceQueue.find_by(device_id: d.id).user_id %>
+																	<% if user_id == @current_user.id %>
+																		<%= "Current User" %>
+																	<% else %>
+																		<% email=User.find(user_id).email %>
+																		<%= email %>
+																	<% end %>
 																<% end %>
 															</td>
 															<td><%= d.slug %></td>
@@ -166,8 +172,24 @@
 				</div>
 			</div>
 			
-			<div id="ajax-modal" class="modal fade" tabindex="-1" style="display: none;"></div>
-			
+
+
+			<div id="static" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false" style="display: block;">
+						<div class="modal-body">
+							<p id="onfail">
+								The Device is already in use.
+							</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" data-dismiss="modal" class="btn btn-default">
+								Cancel
+							</button>
+							<button type="button" data-dismiss="modal" class="btn btn-primary">
+								Ok
+							</button>
+						</div>
+			</div>
+
 
 
 			<script>
@@ -175,6 +197,5 @@
 						
 					Main.init();
 					UIModals.init();
-
 				});
 			</script>

@@ -1,11 +1,11 @@
-$(document).ready(function(){
+
 	
 	var device_id;
 
 
 //getting device data
 		$(".device_link").on("click",function(){
-
+			console.log("ck")
 			device_id = $(this).attr("data-device-id");
 			
 			$.ajax(
@@ -20,20 +20,23 @@ $(document).ready(function(){
 					datatype: "json",
 
 					success: function( json ) {
-						$("#device_name").val(json.name);
-						$("#device_type").val(json.device_type);
-						$("#slug").val(json.slug);
-						$("#responsive").modal("show");
+						if(json.message == "success")
+						{	
+							$("#device_name").val(json.data.name);
+							$("#device_type").val(json.data.device_type);
+							$("#slug").val(json.data.slug);
+							$("#responsive").modal("show");
+						}
+						else
+						{
+							$("#onfail").text(json.message).addClass("center");
+							$("#static").modal("show");
+						}
 		    		},
 
 		    		error: function(xhr, status, errorThrown) {
 		    			console.log("error: " +errorThrown);
-				    },
-		 
-				    // Code to run regardless of success or failure
-				    complete: function( xhr, status ) {
-				        	console.log( "The request is complete!" );
-				    	}
+				    }
 				}
 			);
 		});
@@ -55,18 +58,13 @@ $(document).ready(function(){
 					$("#responsive").modal("hide");
 					var tag=$("#tag_id_"+device_id).find("span");
 					tag.text("Using").addClass("label label-sm label-danger");
+					$("#email_id_"+device_id).text("Current User");
+					return;
 	    		},
 
 	    		error: function(xhr, status, errorThrown) {
 	    			console.log("error: "+errorThrown);
-			    },
-	 
-			    // Code to run regardless of success or failure
-			    complete: function( xhr, status ) {
-			        	console.log( "The request is complete!" );
-			    	}
+			    }
 			}
 		);
 	});
-
-});
