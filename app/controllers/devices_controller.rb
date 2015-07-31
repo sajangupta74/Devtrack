@@ -30,7 +30,6 @@ class DevicesController < ApplicationController
 
 	  def assign_device
 	    id=params[:id].to_i
-	    puts "#{id} #{id.class}"
 	    device=Device.find(id)
 	    if device.status_id == 1
 	    	DeviceQueue.create(device_id: id, user_id: current_user.id, time: Time.now)

@@ -15,6 +15,7 @@ post '/getdevice/:id', to: 'devices#get_device', as: 'getdevice'
 post '/assigndevice/:id', to: 'devices#assign_device', as: 'assigndevice'
 
 get '/users/info', to: 'user_info#overview', as: 'userinfo'
+get '/users/update', to: 'user_info#update', as: 'update_userinfo'
 
 mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 

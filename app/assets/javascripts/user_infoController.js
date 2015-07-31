@@ -12,6 +12,7 @@
 //= require jquery.cookie.js
 //= require bootstrap-colorpalette.js
 //= require main.js
-//= bootstrap-fileupload.min.js
-//= jquery.pulsate.min.js
-//= pages-user-profile.js
+//= require bootstrap-fileupload.min.js
+//= require jquery.pulsate.min.js
+//= require pages-user-profile.js
+//= require custom.js

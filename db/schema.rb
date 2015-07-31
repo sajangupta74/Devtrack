@@ -50,12 +50,17 @@ ActiveRecord::Schema.define(version: 20150729063411) do
   end
 
   create_table "user_infos", force: true do |t|
+    t.integer  "user_id"
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "age"
+    t.date     "dob"
     t.binary   "image",       limit: 10485760
     t.string   "department"
     t.string   "designation"
+    t.integer  "phone"
+    t.string   "gender"
+    t.string   "city"
+    t.integer  "zipcode"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
