@@ -1,16 +1,14 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, 
+  :trackable, :validatable, :omniauthable
 
   has_many :DeviceQueue
   has_one :UserInfo
 
   def self.from_google_auth(auth)
-    #last_id = User.last.id
     error = where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
-      #user.id = last_id + 1
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
@@ -54,4 +52,11 @@ class User < ActiveRecord::Base
     end
   end
 
+
+  def self.update_password(id,pass)
+    User.find(id).update(password: pass)
+  end
+
+
 end
+

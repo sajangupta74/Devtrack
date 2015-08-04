@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20150729063411) do
     t.string   "last_name"
     t.date     "dob"
     t.binary   "image",       limit: 10485760
+    t.string   "image_name"
     t.string   "department"
     t.string   "designation"
     t.integer  "phone"

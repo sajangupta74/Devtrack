@@ -440,25 +440,25 @@
                                                         <label class="control-label">
                                                             First Name
                                                         </label>
-                                                        <input type="text" placeholder="Peter" class="form-control" id="firstname" name="info[first_name]" value="<%= @user.first_name %>">
+                                                        <input type="text" placeholder="Peter" class="form-control" id="firstname" name="info[first_name]" value="">
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">
                                                             Last Name
                                                         </label>
-                                                        <input type="text" placeholder="Clark" class="form-control" id="lastname" name="info[last_name]" value="<%= @user.last_name %>">
+                                                        <input type="text" placeholder="Clark" class="form-control" id="lastname" name="info[last_name]" value="">
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">
                                                             Email Address
                                                         </label>
-                                                        <input type="email" placeholder="peter@example.com" class="form-control" id="email" name="info[email]" value="<%= @email %>">
+                                                        <input type="email" placeholder="peter@example.com" class="form-control" id="email" name="info[email]" value="">
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">
                                                             Phone
                                                         </label>
-                                                        <input type="text" placeholder="(641)-734-4763" class="form-control" id="phone"           name="info[phone]" value="<%= @user.phone %>">
+                                                        <input type="text" placeholder="(641)-734-4763" class="form-control" id="phone"           name="info[phone]" value="">
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">
@@ -492,7 +492,7 @@
                                                         </label>
                                                         <div class="row">
                                                             <div class="col-md-3">
-                                                                <select name="info[dd]" id="dd" class="form-control" value="<%= @user.dob.day %>">
+                                                                <select name="info[dd]" id="dd" class="form-control" value="">
                                                                     <option value="" selected="selected">DD</option>
                                                                     <option value="01">1</option>
                                                                     <option value="02">2</option>
@@ -528,7 +528,7 @@
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-3">
-                                                                <select name="info[mm]" id="mm" class="form-control" value="<%= @user.dob.month %>" >
+                                                                <select name="info[mm]" id="mm" class="form-control" value="" >
                                                                     <option value="" selected="selected">MM</option>
                                                                     <option value="01">1</option>
                                                                     <option value="02">2</option>
@@ -545,7 +545,7 @@
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-3">
-                                                                <input type="text" placeholder="1982" id="yyyy" name="info[yr]" class="form-control" value="<%= @user.dob.year %>">
+                                                                <input type="text" placeholder="1982" id="yyyy" name="info[yr]" class="form-control" value="">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -556,17 +556,11 @@
                                                         <div>
                                                             <label class="radio-inline">
                                                                 <input type="radio"  value="female" name="info[gender]" id="gender_female"
-                                                                <% if @user.gender=="female"   %>
-                                                                <%="checked='checked'" %>
-                                                                <% end %>
                                                                 >
                                                                 Female
                                                             </label>
                                                             <label class="radio-inline">
                                                                 <input type="radio" value="male" name="info[gender]"  id="gender_male" 
-                                                                <% if @user.gender=="male"   %>
-                                                                <%="checked='checked'" %>
-                                                                <% end %>
                                                                 >
                                                                 Male
                                                             </label>
@@ -578,7 +572,7 @@
                                                                 <label class="control-label">
                                                                     Zip Code
                                                                 </label>
-                                                                <input class="form-control" placeholder="12345" type="text" name="info[zipcode]" id="zipcode" value="<%= @user.zipcode %>">
+                                                                <input class="form-control" placeholder="12345" type="text" name="info[zipcode]" id="zipcode" value="">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-8">
@@ -586,7 +580,7 @@
                                                                 <label class="control-label">
                                                                     City
                                                                 </label>
-                                                                <input class="form-control tooltips" placeholder="Delhi" type="text" data-original-title="We'll display it when you write reviews" data-rel="tooltip"  title="" data-placement="top" name="info[city]" id="city" value="<%= @user.city %>">
+                                                                <input class="form-control tooltips" placeholder="Delhi" type="text" data-original-title="We'll display it when you write reviews" data-rel="tooltip"  title="" data-placement="top" name="info[city]" id="city" value="">
                                                             </div>
                                                         </div>
                                                     </div>

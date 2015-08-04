@@ -6,12 +6,13 @@ class CreateUserInfos < ActiveRecord::Migration
       t.string  :last_name
       t.date    :dob
       t.binary  :image, :limit => 10.megabyte
+      t.string  :image_name
       t.string  :department
       t.string  :designation
       t.integer :phone
       t.string  :gender
       t.string  :city
-      t.integer :zipcode  
+      t.integer :zipcode
 
       t.timestamps
     end
