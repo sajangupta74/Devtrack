@@ -1,0 +1,208 @@
+ <%= form_for @userinfo, multipart: true do |f| %>
+<!-- <form action="<%= update_userinfo_path %>" role="form" id="form" enctype="multipart/form-data" method="post"> -->
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h3>Account Info</h3>
+                                                    <hr>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label">
+                                                            First Name
+                                                        </label>
+                                                        <%= f.text_field :first_name, placeholder: "Peter", class: "form-control" %>
+                                                        <!--<input type="text" placeholder="Peter" class="form-control" id="firstname" name="info[first_name]" value="<%= @userinfo.first_name %>">-->
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label">
+                                                            Last Name
+                                                        </label>
+                                                        <%= f.text_field :last_name, placeholder: "Clark", class: "form-control" %>
+
+                                                        <!--<input type="text" placeholder="Clark" class="form-control" id="lastname" name="info[last_name]" value="<%= @userinfo.last_name %>">-->
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label">
+                                                            Email Address
+                                                        </label>
+                                                        
+
+                                                        <!--<input type="email" placeholder="peter@example.com" class="form-control" id="email" name="info[email]" value="<%= @email %>">-->
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label">
+                                                            Phone
+                                                        </label>
+                                                        <%= f.text_field :phone, placeholder: "(641)-734-4763", class: "form-control" %>
+
+                                                        <!--<input type="text" placeholder="(641)-734-4763" class="form-control" id="phone"           name="info[phone]" value="<%= @userinfo.phone %>">-->
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label">
+                                                            Department
+                                                        </label>
+                                                        <%= f.text_field :department, placeholder: "Quality Assurance", class: "form-control" %>
+
+                                                        <!--<input type="text" placeholder="Quality Assurance" class="form-control" id="department" name="info[department]">-->
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label">
+                                                            Designation
+                                                        </label>
+                                                        <%= f.text_field :designation, placeholder: "Software Engineer", class: "form-control" %>
+
+                                                        <!--<input type="text" placeholder="Software Engineer" class="form-control" id="designation" name="info[designation]">-->
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group connected-group">
+                                                        <label class="control-label">
+                                                            Date of Birth
+                                                        </label>
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <select name="user_info[dd]" id="dd" class="form-control" value="">
+                                                                    <option value="" selected="selected">DD</option>
+                                                                    <option value="01">1</option>
+                                                                    <option value="02">2</option>
+                                                                    <option value="03">3</option>
+                                                                    <option value="04">4</option>
+                                                                    <option value="05">5</option>
+                                                                    <option value="06">6</option>
+                                                                    <option value="07">7</option>
+                                                                    <option value="08">8</option>
+                                                                    <option value="09">9</option>
+                                                                    <option value="10">10</option>
+                                                                    <option value="11">11</option>
+                                                                    <option value="12">12</option>
+                                                                    <option value="13">13</option>
+                                                                    <option value="14">14</option>
+                                                                    <option value="15">15</option>
+                                                                    <option value="16">16</option>
+                                                                    <option value="17">17</option>
+                                                                    <option value="18">18</option>
+                                                                    <option value="19">19</option>
+                                                                    <option value="20">20</option>
+                                                                    <option value="21">21</option>
+                                                                    <option value="22">22</option>
+                                                                    <option value="23">23</option>
+                                                                    <option value="24">24</option>
+                                                                    <option value="25">25</option>
+                                                                    <option value="26">26</option>
+                                                                    <option value="27">27</option>
+                                                                    <option value="28">28</option>
+                                                                    <option value="29">29</option>
+                                                                    <option value="30">30</option>
+                                                                    <option value="31">31</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <select name="user_info[mm]" id="mm" class="form-control" value="" >
+                                                                    <option value="" selected="selected">MM</option>
+                                                                    <option value="01">1</option>
+                                                                    <option value="02">2</option>
+                                                                    <option value="03">3</option>
+                                                                    <option value="04">4</option>
+                                                                    <option value="05">5</option>
+                                                                    <option value="06">6</option>
+                                                                    <option value="07">7</option>
+                                                                    <option value="08">8</option>
+                                                                    <option value="09">9</option>
+                                                                    <option value="10">10</option>
+                                                                    <option value="11">11</option>
+                                                                    <option value="12">12</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <input type="text" placeholder="1982" id="yyyy" name="user_info[yr]" class="form-control" value="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label">
+                                                            Gender
+                                                        </label>
+                                                        <div>
+                                                            <label class="radio-inline">
+                                                                <input type="radio"  value="female" name="user_info[gender]" id="gender_female"
+                                                                <% if @userinfo.gender=="female"   %>
+                                                                <%="checked='checked'" %>
+                                                                <% end %>
+                                                                >
+                                                                Female
+                                                            </label>
+                                                            <label class="radio-inline">
+                                                                <input type="radio" value="male" name="user_info[gender]"  id="gender_male" 
+                                                                <% if @userinfo.gender=="male"   %>
+                                                                <%="checked='checked'" %>
+                                                                <% end %>
+                                                                >
+                                                                Male
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="control-label">
+                                                                    Zip Code
+                                                                </label>
+                                                                <input class="form-control" placeholder="12345" type="text" name="user_info[zipcode]" id="zipcode" value="<%= @userinfo.zipcode %>">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="form-group">
+                                                                <label class="control-label">
+                                                                    City
+                                                                </label>
+                                                                <input class="form-control tooltips" placeholder="Delhi" type="text" data-original-title="We'll display it when you write reviews" data-rel="tooltip"  title="" data-placement="top" name="user_info[city]" id="city" value="<%= @userinfo.city %>">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                   
+<!--
+                                                    <div class="form-group">
+                                                        <label>
+                                                            Image Upload
+                                                        </label>
+                                                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                            <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><%= image_tag image_path %>
+                                                            </div>
+                                                            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
+                                                            <div class="user-edit-image-buttons">
+                                                                <span class="btn btn-light-grey btn-file"><span class="fileupload-new"><i class="fa fa-picture"></i> Select image</span><span class="fileupload-exists"><i class="fa fa-picture"></i> Change</span>
+                                                                    <input type="file" id="profile-picture" name="user_info[photo]">
+                                                                </span>
+                                                                <a href="#" class="btn fileupload-exists btn-light-grey" data-dismiss="fileupload">
+                                                                    <i class="fa fa-times"></i> Remove
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                 -->   
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div>
+                                                        Required Fields
+                                                        <hr>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <p>
+                                                        By clicking UPDATE, you are agreeing to the Policy and Terms &amp; Conditions.
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button class="btn btn-teal btn-block" type="submit">
+                                                        Update <i class="fa fa-arrow-circle-right"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        <!--</form>-->
+                                        <% end %>

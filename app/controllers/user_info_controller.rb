@@ -1,69 +1,77 @@
 class UserInfoController < ApplicationController
 
+before_action :set_userinfo
 layout "controller_layouts"
+respond_to :html
 
-def overview
-	@user=userinfo_exist?
-	if @user == false
+
+def show	
+	@userinfo=userinfo_exist?
+	
+	if @userinfo == false
 		render 'overview_new_user'
 	else
 		@email=User.find(current_user.id).email
 		render 'overview'
 	end
-	
 end
 
+
+def edit
+	render 'overview'
+end
+
+
+def send_image
+	@user_image=userinfo_exist?
+	send_data @user_image.image , type: 'img/png', disposition: 'inline', filename: @user_image.image_name
+end
+
+
 def update
-	var=params[:info]
+	var=params[:user_info]
 	@email=current_user.email
 	temp=var[:dd].to_s+"-"+var[:mm].to_s+"-"+var[:yr].to_s
 	temp=Date.parse(temp)
-
-	user=userinfo_exist?
-
-	if user === false
-		user=UserInfo.create(user_id: current_user.id, first_name: var[:first_name], 
+	@userinfo.update(user_id: current_user.id, first_name: var[:first_name], 
 			last_name: var[:last_name], phone: var[:phone], gender: var[:gender], city: var[:city], 
-			zipcode: var[:zipcode], dob: temp, department: var[:department], designation: var[:designation], 
-			image_name: var[:photo].original_filename)
+			zipcode: var[:zipcode], dob: temp, department: var[:department], designation: var[:designation])
+
+
+=begin
+	@userinfo=userinfo_exist?
+
+	if @userinfo === false
+		@userinfo=UserInfo.create(user_id: current_user.id, first_name: var[:first_name], 
+			last_name: var[:last_name], phone: var[:phone], gender: var[:gender], city: var[:city], 
+			zipcode: var[:zipcode], dob: temp, department: var[:department], designation: var[:designation])
+			#image_name: var[:photo].original_filename)
 			
-		user.update(image: var[:photo].read)
+			
+#getting uploaded profile image from browser
+
+			@userinfo.update(image: var[:photo].read)
 			f1=File.open("public/#{var[:photo].original_filename}","wb")
 			f1.write(var[:photo].read)
 			f1.close
 
-			if var[:password] == var[:password_again]
-				if var[:password] != nil
-					User.update_password(current_user.id, var[:password])
-				end
-			else
-				flash[:notice]="Password did not match"
-			end
-
-		redirect_to userinfo_path
+		respond_with(@userinfo)
 	else
-			user.update(user_id: current_user.id, first_name: var[:first_name], 
+
+			@userinfo.update(user_id: current_user.id, first_name: var[:first_name], 
 			last_name: var[:last_name], phone: var[:phone], gender: var[:gender], city: var[:city], 
 			zipcode: var[:zipcode], dob: temp, department: var[:department], designation: var[:designation], 
 			image_name: var[:photo].original_filename)
-			temp=var[:photo]
+		
 
-			user.update(image: temp.read)
+#getting uploaded profile image from browser
 
+			@userinfo.update(image: var[:photo].read)
 			f1=File.open("public/temp.jpg","wb")
-			f1.write(user.image)
+			f1.write(@userinfo.image)
 			f1.close
-
-		if var[:password] == var[:password_again]
-			if var[:password] != nil
-					User.update_password(current_user.id, var[:password])
-			end
-		else
-			flash[:notice]="Password did not match"
-		end
-
-		redirect_to userinfo_path
-	end
+=end
+		respond_with(@userinfo)
 
 	
 end
@@ -80,7 +88,11 @@ end
 
 private
 	def set_params
-		params.require(:info).permit!
+		params.require(:userinfo).permit!
+	end
+
+	def set_userinfo
+		@userinfo=UserInfo.find_by(user_id: current_user.id)
 	end
 
 end

@@ -8,8 +8,12 @@
 </head>
 <body>
 	<% user=UserInfo.find_by(user_id: current_user.id) %>
-	<% @username = user.first_name + " " + user.last_name %>
-  	<%= render 'layouts/header' %>
+  <% if current_user.is_admin == 0 %>
+	 <% @username = user.first_name + " " + user.last_name %>
+  <% else %>
+    <% @username = "Admin" %>
+  <% end %>
+  <%= render 'layouts/header' %>
 
 
 

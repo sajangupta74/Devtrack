@@ -11,7 +11,6 @@ class ProductsController < ApplicationController
   end
 
   def show
-    puts "Under show"
   end
 
   def new
