@@ -15,11 +15,11 @@ post '/getdevice/:id', to: 'devices#get_device', as: 'getdevice'
 post '/assigndevice/:id', to: 'devices#assign_device', as: 'assigndevice'
 
 
-get '/users/info', to: 'user_info#overview', as: 'userinfo'
-post '/users/update', to: 'user_info#update', as: 'update_userinfo'
+#get '/users/info', to: 'user_info#overview', as: 'userinfo'
+#post '/users/update', to: 'user_info#update', as: 'update_userinfo'
 get '/users/getimage', to: 'user_info#send_image', as: 'image'
 
-resources :user_info, except: [:destroy, :index]
+resource :user_info, path: '/user/info', except: [:index, :destroy]
 
 mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 

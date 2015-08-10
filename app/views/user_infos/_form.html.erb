@@ -1,5 +1,4 @@
  <%= form_for @userinfo, multipart: true do |f| %>
-<!-- <form action="<%= update_userinfo_path %>" role="form" id="form" enctype="multipart/form-data" method="post"> -->
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <h3>Account Info</h3>
@@ -27,7 +26,7 @@
                                                         </label>
                                                         
 
-                                                        <!--<input type="email" placeholder="peter@example.com" class="form-control" id="email" name="info[email]" value="<%= @email %>">-->
+                                                        <input type="email" placeholder="peter@example.com" class="form-control" id="email" name="info[email]" value="<%= @email %>" disabled>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">
@@ -204,5 +203,4 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                        <!--</form>-->
-                                        <% end %>
+<% end %>

@@ -47,7 +47,6 @@ class ProductsController < ApplicationController
 
   private
     def set_product
-      puts "Start set"
       @product = Product.find(params[:id])
     end
 
