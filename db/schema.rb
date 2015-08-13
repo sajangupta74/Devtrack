@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20150729063411) do
     t.integer  "device_id"
     t.integer  "user_id"
     t.datetime "time"
+    t.datetime "return_time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

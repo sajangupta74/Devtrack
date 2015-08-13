@@ -21,7 +21,7 @@ def create
 			last_name: var[:last_name], phone: var[:phone], gender: var[:gender], city: var[:city], 
 			zipcode: var[:zipcode], dob: temp, department: var[:department], 
 			designation: var[:designation])
-	respond_with(@user_info)
+	redirect_to edit_user_info_path
 end
 
 
@@ -32,7 +32,12 @@ end
 
 
 def edit
-	respond_with(@userinfo)
+	@userinfo=UserInfo.find_by(user_id: current_user.id)
+	if @userinfo == nil
+		redirect_to new_user_info_path
+	else	
+		respond_with(@userinfo)
+	end
 end
 
 
@@ -51,6 +56,9 @@ def update
 			last_name: var[:last_name], phone: var[:phone], gender: var[:gender], city: var[:city], 
 			zipcode: var[:zipcode], dob: temp, department: var[:department], 
 			designation: var[:designation])
+
+	update_pass = params[:update]
+	registration_path(update_pass)
 
 	respond_with(@userinfo)	
 end

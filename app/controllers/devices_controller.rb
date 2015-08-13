@@ -1,6 +1,7 @@
 class DevicesController < ApplicationController
 
 	before_action :authenticate_user!
+	load_and_authorize_resource
 	layout "controller_layouts"
 	before_action :define
 
@@ -12,7 +13,6 @@ class DevicesController < ApplicationController
 	end
 
 	  def get_device
-  
 	    id=params[:id]
 	    @device=Device.find(id)
 	    if @device != nil
@@ -28,11 +28,13 @@ class DevicesController < ApplicationController
 	    end
 	  end
 
+
 	  def assign_device
 	    id=params[:id].to_i
 	    device=Device.find(id)
 	    if device.status_id == 1
-	    	DeviceQueue.create(device_id: id, user_id: current_user.id, time: Time.now)
+	    	DeviceQueue.create(device_id: id, user_id: current_user.id, time: Time.now, 
+	    		return_time: Time.now+7200)		#return time is 2 hours ahead
 	    	device.update(status_id: 3)
 	    	@user_id=User.joins(:DeviceQueue).find_by(device_id=id).email
 	    	
@@ -44,8 +46,6 @@ class DevicesController < ApplicationController
 	        	format.json {render json: {"message" => "Device already in use"} }
 	    	end
 	    end
-
-	    
 	  end
 
 

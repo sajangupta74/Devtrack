@@ -16,3 +16,4 @@
 //= require jquery.pulsate.min.js
 //= require pages-user-profile.js
 //= require custom.js
+//= require form-validation.js
