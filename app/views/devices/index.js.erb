@@ -5,7 +5,6 @@
 
 //getting device data
 		$(".device_link").on("click",function(){
-			console.log("ck")
 			device_id = $(this).attr("data-device-id");
 			
 			$.ajax(
@@ -13,7 +12,7 @@
 				{
 					url: '/getdevice/'+device_id,
 
-					data: { id: device_id},
+					data: { id: device_id },
 
 					type: "POST",
 
@@ -46,20 +45,24 @@
 		$.ajax(
 
 			{
-				url: '/assigndevice/'+device_id,
-
-				data: { id: device_id},
+				url: '/requestdevice/'+device_id,
 
 				type: "POST",
 
 				datatype: "json",
 
 				success: function( json ) {
-					$("#responsive").modal("hide");
-					var tag=$("#tag_id_"+device_id).find("span");
-					tag.text("Using").addClass("label label-sm label-danger");
-					$("#email_id_"+device_id).text("Current User");
-					return;
+					if(json.message=="success")
+					{
+						$("#responsive").modal("hide");
+						var tag=$("#tag_id_"+device_id).find("span");
+						tag.text("Request in Process").addClass("label label-sm label-danger");
+						$("#email_id_"+device_id).text("Current User");
+					}
+					else
+					{
+						//do nothing
+					}
 	    		},
 
 	    		error: function(xhr, status, errorThrown) {

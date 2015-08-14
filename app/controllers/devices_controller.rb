@@ -1,9 +1,10 @@
 class DevicesController < ApplicationController
 
-	before_action :authenticate_user!
-	load_and_authorize_resource
+	#before_action :authenticate_user!
+	#load_and_authorize_resource
 	layout "controller_layouts"
 	before_action :define
+
 
 	def index
 		@devices=Device.all
@@ -12,8 +13,39 @@ class DevicesController < ApplicationController
 		@current_user=current_user
 	end
 
+
+
+	def request_device
+		id=params[:id]
+		@device = Device.find(id)
+
+		userinfo=UserInfo.find_by(user_id: current_user.id)
+		username=userinfo.first_name + " " + userinfo.last_name
+
+	#generating device request
+		request=Request.create(sender_id: current_user.id, reciever_id: 1, device_id: @device)
+
+	#generating notification
+		notification=Notification.create(request_id: request.id, user_id: 1, 
+			sender_id: current_user.id, description: "#{username} requested for #{@device.name}",
+			activity_type: 1)
+
+		if ( request != nil && notification != nil )
+			respond_to do |format|
+		    	format.json {render json: {"message" => "success"} }
+			end
+		else
+			respond_to do |format|
+		    	format.json {render json: {"message" => "fail"} }
+			end
+		end
+	end
+
+
+
 	  def get_device
 	    id=params[:id]
+	    puts params.inspect
 	    @device=Device.find(id)
 	    if @device != nil
 	    	if @device.status_id === 1
@@ -27,6 +59,7 @@ class DevicesController < ApplicationController
 		  	end
 	    end
 	  end
+
 
 
 	  def assign_device
@@ -52,9 +85,13 @@ class DevicesController < ApplicationController
 	def show 		
 	end
 
+
+
 	def new
 		@device = Device.new
 	end
+
+
 
 	def create
 		@device = Device.new(device_params)
@@ -63,25 +100,36 @@ class DevicesController < ApplicationController
 		redirect_to devices_path
 	end
 
+
+
 	def edit
 	end
+
+
 
 	def update
 		flash[:notice] = "Device was successfully updated." if @device.update(device_params)
 	end
 
+
+
 	def destroy
 		flash[:notice] = "Device was successfully deleted." if @device.destroy
 	end
+
+
+
 
 	private
 		def set_device
 			@device = Device.find(params[:id])
 		end
 
+
 		def device_params
 			params.require(:device).permit(:name,:slug,:device_type)
 		end
+
 
 		def define
 			@device_type=Array.new

@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729063411) do
+ActiveRecord::Schema.define(version: 20150814081703) do
+
+  create_table "activities", force: true do |t|
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "device_queues", force: true do |t|
     t.integer  "device_id"
@@ -37,9 +43,30 @@ ActiveRecord::Schema.define(version: 20150729063411) do
     t.datetime "updated_at"
   end
 
+  create_table "notifications", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "sender_id"
+    t.string   "description"
+    t.integer  "activity_type"
+    t.integer  "request_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "products", force: true do |t|
     t.string   "name"
     t.integer  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "requests", force: true do |t|
+    t.integer  "sender_id"
+    t.integer  "reciever_id"
+    t.boolean  "is_success"
+    t.boolean  "is_reject"
+    t.boolean  "is_on_hold"
+    t.integer  "device_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

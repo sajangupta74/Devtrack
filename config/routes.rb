@@ -13,7 +13,7 @@ devise_for :users, controllers: { :omniauth_callbacks => "users/omniauth_callbac
 get '/index', to: 'main#index', as: 'main'
 post '/getdevice/:id', to: 'devices#get_device', as: 'getdevice'
 post '/assigndevice/:id', to: 'devices#assign_device', as: 'assigndevice'
-
+post '/requestdevice/:id', to: 'devices#request_device', as: 'requestdevice'
 
 #get '/users/info', to: 'user_info#overview', as: 'userinfo'
 #post '/users/update', to: 'user_info#update', as: 'update_userinfo'

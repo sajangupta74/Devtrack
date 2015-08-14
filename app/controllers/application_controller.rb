@@ -21,8 +21,6 @@ end
 
   def set_username
     if user_signed_in?
-      puts "yes signed in"
-      puts current_user.id
       if UserInfo.find_by(user_id: current_user.id) != nil && current_user.is_admin == 0
         user = UserInfo.find_by(user_id: current_user.id)
         @username = user.first_name + " " + user.last_name
