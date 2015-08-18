@@ -20,7 +20,7 @@ class Ability
         if user.is_admin == 1
             can :manage, :all
         elsif user.is_admin == 0
-            can [:index, :get_device, :assign_device, :show], Device
+            can [:index, :get_device, :assign_device, :show, :request_device], Device
             can :manage, UserInfo
         end
 

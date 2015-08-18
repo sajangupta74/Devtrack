@@ -41,6 +41,7 @@
 		});
 
 //assinging device to user
+	$(".req").unbind('click');
 	$(".req").on("click", function(){
 		$.ajax(
 
@@ -61,6 +62,7 @@
 					}
 					else
 					{
+						console.log("Under else");
 						//do nothing
 					}
 	    		},

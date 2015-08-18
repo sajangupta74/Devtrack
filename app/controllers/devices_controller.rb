@@ -11,11 +11,45 @@ class DevicesController < ApplicationController
 		@devices_users=User.joins(:DeviceQueue)
 		@assign_devices=DeviceQueue.all
 		@current_user=current_user
+
+		requests = Request.all 			#getting all requested devices
+
+		@requested_devices_info = {}	#contains all information of the device which is requested 
+										#by the users {device_id, sender_id, sender_name}
+
+		requested_devices = Array.new	#Array of all of the devices, which are requested
+
+		if requests != nil						#if single device has been requested
+			requests.each do |request| 
+				requested_devices << request
+			end
+			i=1;
+			requests.length.times do
+				device_id = requested_devices[i-1].device_id
+				sender_id = requested_devices[i-1].sender_id
+				userinfo = UserInfo.find_by(user_id: sender_id)
+				username = userinfo.first_name + " " + userinfo.last_name
+
+				
+					temp = { "device_id_#{requested_devices[i-1].id}" => {
+							device_id: device_id,
+							sender_id: sender_id,
+							username: username
+						}
+					}
+				
+				@requested_devices_info["device_id_#{requested_devices[i-1].id}"] = temp["device_id_#{requested_devices[i-1].id}"]
+				i = i+1
+			end
+		else							# if no device has been  requested
+			@requested_devices = nil
+		end
 	end
 
 
 
 	def request_device
+
 		id=params[:id]
 		@device = Device.find(id)
 
@@ -23,7 +57,7 @@ class DevicesController < ApplicationController
 		username=userinfo.first_name + " " + userinfo.last_name
 
 	#generating device request
-		request=Request.create(sender_id: current_user.id, reciever_id: 1, device_id: @device)
+		request=Request.create(sender_id: current_user.id, reciever_id: 1, device_id: @device.id)
 
 	#generating notification
 		notification=Notification.create(request_id: request.id, user_id: 1, 
@@ -33,10 +67,12 @@ class DevicesController < ApplicationController
 		if ( request != nil && notification != nil )
 			respond_to do |format|
 		    	format.json {render json: {"message" => "success"} }
+		    	devices_path
 			end
 		else
 			respond_to do |format|
 		    	format.json {render json: {"message" => "fail"} }
+		    	devices_path
 			end
 		end
 	end
@@ -50,11 +86,11 @@ class DevicesController < ApplicationController
 	    if @device != nil
 	    	if @device.status_id === 1
 		      respond_to do |format|
-		        format.json {render json: { "data" => @device, "message" => "success" } }
+		        format.json {render json: { "data" => @device, "message" => "success" } }		        
 		      end
 		  	else
 		  	  respond_to do |format|
-		        format.json {render json: {"message" => "Device already in use"} }
+		        format.json {render json: {"message" => "fail"} }
 		      end
 		  	end
 	    end

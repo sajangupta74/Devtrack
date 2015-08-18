@@ -24,16 +24,14 @@ end
       if UserInfo.find_by(user_id: current_user.id) != nil && current_user.is_admin == 0
         user = UserInfo.find_by(user_id: current_user.id)
         @username = user.first_name + " " + user.last_name
-        puts @username
       elsif UserInfo.find_by(user_id: current_user.id) != nil && current_user.is_admin == 1
         @username = "Admin"
-        puts @username
       elsif UserInfo.find_by(user_id: current_user.id) == nil
         @username = "New User"
-        puts @username
       end
     end
   end
+
 
   protected
 
