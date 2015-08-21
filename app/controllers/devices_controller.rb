@@ -12,12 +12,12 @@ class DevicesController < ApplicationController
 		@assign_devices=DeviceQueue.all
 		@current_user=current_user
 
-		requests = Request.all 			#getting all requested devices
+		requests = Request.all 				#getting all requested devices
 
-		@requested_devices_info = {}	#contains all information of the device which is requested 
-										#by the users {device_id, sender_id, sender_name}
+		@requested_devices_info = {}		#contains all information of the device which is requested 
+											#by the users {device_id, sender_id, sender_name}
 
-		requested_devices = Array.new	#Array of all of the devices, which are requested
+		requested_devices = Array.new		#Array of all of the devices, which are requested
 
 		if requests != nil						#if single device has been requested
 			requests.each do |request| 
@@ -29,16 +29,12 @@ class DevicesController < ApplicationController
 				sender_id = requested_devices[i-1].sender_id
 				userinfo = UserInfo.find_by(user_id: sender_id)
 				username = userinfo.first_name + " " + userinfo.last_name
-
 				
-					temp = { "device_id_#{requested_devices[i-1].id}" => {
-							device_id: device_id,
-							sender_id: sender_id,
-							username: username
-						}
-					}
-				
-				@requested_devices_info["device_id_#{requested_devices[i-1].id}"] = temp["device_id_#{requested_devices[i-1].id}"]
+				@requested_devices_info["device_id_#{requested_devices[i-1].device_id}"] = {
+						device_id: device_id,
+						sender_id: sender_id,
+						username: username
+				}
 				i = i+1
 			end
 		else							# if no device has been  requested
@@ -66,6 +62,7 @@ class DevicesController < ApplicationController
 
 		if ( request != nil && notification != nil )
 			respond_to do |format|
+				@device.update(status_id: 4)
 		    	format.json {render json: {"message" => "success"} }
 		    	devices_path
 			end
@@ -84,15 +81,24 @@ class DevicesController < ApplicationController
 	    puts params.inspect
 	    @device=Device.find(id)
 	    if @device != nil
-	    	if @device.status_id === 1
-		      respond_to do |format|
-		        format.json {render json: { "data" => @device, "message" => "success" } }		        
-		      end
-		  	else
-		  	  respond_to do |format|
-		        format.json {render json: {"message" => "fail"} }
-		      end
-		  	end
+	    	case @device.status_id
+	    		when 1
+	    			respond_to do |format|
+		        		format.json {render json: { "data" => @device, "message" => "available" } }		        
+		      		end
+		      	when 2
+		      		respond_to do |format|
+		        		format.json {render json: { "data" => @device, "message" => "not available" } }		        
+		      		end
+		      	when 3
+		      		respond_to do |format|
+		        		format.json {render json: {"message" => "using"} }
+		      		end
+		      	when 4
+		      		respond_to do |format|
+		        		format.json {render json: {"message" => "requested"} }
+		      		end
+		     end
 	    end
 	  end
 

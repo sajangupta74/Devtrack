@@ -7,7 +7,7 @@
 		statuses[0] = Status.create(id: 1, status_name: "available")
 		statuses[1] = Status.create(id: 2, status_name: "not available")
 		statuses[2] = Status.create(id: 3, status_name: "using")
-		statuses[3] = Status.create(id: 4, status_name: "requested")
+		statuses[3] = Status.create(id: 4, status_name: "requested")		
 	else
 		#do nothing
 	end

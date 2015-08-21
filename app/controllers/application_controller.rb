@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
   skip_before_action :verify_authenticity_token
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_username
+  before_action :set_username , :user_logged_in
 
 before_filter do
   resource = controller_name.singularize.to_sym
@@ -16,6 +16,19 @@ end
   
   rescue_from CanCan::AccessDenied do |exception|
     render file: 'public/unathorized.html.erb'
+  end
+
+
+  def user_logged_in
+    
+    if user_signed_in? === false && is_a?(::DeviseController) === false
+      puts "NOT LOGGED IN"
+      puts user_signed_in?
+      redirect_to new_user_session_path
+    else
+      puts "LOGGED IN"
+        #do nothing
+    end
   end
 
 
