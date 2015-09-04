@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_username , :user_logged_in
+  before_action :set_notifications
 
 before_filter do
   resource = controller_name.singularize.to_sym
@@ -20,18 +21,45 @@ end
 
 
   def user_logged_in
-    
     if user_signed_in? === false && is_a?(::DeviseController) === false
-      puts "NOT LOGGED IN"
-      puts user_signed_in?
       redirect_to new_user_session_path
     else
-      puts "LOGGED IN"
         #do nothing
     end
   end
 
 
+#setting notifications for Admin
+  def set_notifications_admin
+    @notifications = Notification.where( user_id: current_user.id ).order(created_at: :desc).limit(7)
+    @notifications_array = @notifications.select { |notification| notification }
+    @new_notifications_array = @notifications.where( seen: false ).select(:description)
+    @notifications_descriptions_array = @notifications.where( seen: false ).select(:userdescription)
+  end
+
+
+#setting notifications for normal user
+  def set_notifications_user
+    @notifications = Notification.where( sender_id: current_user.id ).order(created_at: :desc).limit(7) 
+    @notifications_array = @notifications.select { |notification| notification }
+    @new_notifications_array = @notifications.where( seen: false )
+    @notifications_descriptions_array = @notifications.where( seen: false ).select(:userdescription)
+  end
+
+#set notification variable
+  def set_notifications
+    if user_signed_in? == true
+      if current_user.is_admin == 1
+        set_notifications_admin
+      elsif current_user.is_admin == 0
+        set_notifications_user
+      end 
+    end
+  end
+
+
+
+#setting username of Admin and normal users
   def set_username
     if user_signed_in?
       if UserInfo.find_by(user_id: current_user.id) != nil && current_user.is_admin == 0
@@ -46,7 +74,7 @@ end
   end
 
 
-  protected
+protected
 
   def after_sign_in_path_for(dashboard)
     # return the path based on resource

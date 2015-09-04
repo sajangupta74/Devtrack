@@ -127,102 +127,23 @@
   </a>
   <ul class="dropdown-menu notifications">
     <li>
-      <span class="dropdown-menu-title"> You have 11 notifications</span>
+      <span class="dropdown-menu-title"> You have <%= @new_notifications_array.length %> new notifications</span>
     </li>
     <li>
       <div class="drop-down-wrapper">
         <ul>
-          <li>
-            <a href="javascript:void(0)">
-              <span class="label label-primary"><i class="fa fa-user"></i></span>
-              <span class="message"> New user registration</span>
-              <span class="time"> 1 min</span>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <span class="label label-success"><i class="fa fa-comment"></i></span>
-              <span class="message"> New comment</span>
-              <span class="time"> 7 min</span>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <span class="label label-success"><i class="fa fa-comment"></i></span>
-              <span class="message"> New comment</span>
-              <span class="time"> 8 min</span>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <span class="label label-success"><i class="fa fa-comment"></i></span>
-              <span class="message"> New comment</span>
-              <span class="time"> 16 min</span>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <span class="label label-primary"><i class="fa fa-user"></i></span>
-              <span class="message"> New user registration</span>
-              <span class="time"> 36 min</span>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <span class="label label-warning"><i class="fa fa-shopping-cart"></i></span>
-              <span class="message"> 2 items sold</span>
-              <span class="time"> 1 hour</span>
-            </a>
-          </li>
-          <li class="warning">
-            <a href="javascript:void(0)">
-              <span class="label label-danger"><i class="fa fa-user"></i></span>
-              <span class="message"> User deleted account</span>
-              <span class="time"> 2 hour</span>
-            </a>
-          </li>
-          <li class="warning">
-            <a href="javascript:void(0)">
-              <span class="label label-danger"><i class="fa fa-shopping-cart"></i></span>
-              <span class="message"> Transaction was canceled</span>
-              <span class="time"> 6 hour</span>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <span class="label label-success"><i class="fa fa-comment"></i></span>
-              <span class="message"> New comment</span>
-              <span class="time"> yesterday</span>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <span class="label label-primary"><i class="fa fa-user"></i></span>
-              <span class="message"> New user registration</span>
-              <span class="time"> yesterday</span>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <span class="label label-primary"><i class="fa fa-user"></i></span>
-              <span class="message"> New user registration</span>
-              <span class="time"> yesterday</span>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <span class="label label-success"><i class="fa fa-comment"></i></span>
-              <span class="message"> New comment</span>
-              <span class="time"> yesterday</span>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <span class="label label-success"><i class="fa fa-comment"></i></span>
-              <span class="message"> New comment</span>
-              <span class="time"> yesterday</span>
-            </a>
-          </li>
+        <%  for i in 0...@notifications_array.length %>
+          <% # new_notif = @notifications %>
+            <li>
+              <a href="javascript:void(0)">
+                <span class="label label-primary"><i class="fa fa-user"></i></span>
+                <span class="message"> <%= @notifications_array[i].userdescription.length > 26 ? 
+                "#{@notifications_array[i].userdescription[0...23]}..." : @notifications_array[i].userdescription %></span>
+                <span class="time"> <%= ((Time.now-@notifications_array[i].created_at)/(60)).round > 59 ? 
+                 ((Time.now-@notifications_array[i].created_at)/(60*60)).round > 24 ? "More than a day ago" : "#{((Time.now-@notifications_array[i].created_at)/(60*60)).round} hr ago"  :  "#{((Time.now-@notifications_array[i].created_at)/(60)).round} min ago"   %> </span>
+              </a>
+            </li>
+        <% end %>
         </ul>
       </div>
     </li>

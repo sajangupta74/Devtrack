@@ -58,7 +58,7 @@ class DevicesController < ApplicationController
 	#generating notification
 		notification=Notification.create(request_id: request.id, user_id: 1, 
 			sender_id: current_user.id, description: "#{username} requested for #{@device.name}",
-			activity_type: 1)
+			activity_type: 1, seen: false, open: false, userdescription: "You have requested #{@device.name}")
 
 		if ( request != nil && notification != nil )
 			respond_to do |format|
