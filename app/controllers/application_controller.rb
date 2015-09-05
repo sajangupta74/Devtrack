@@ -33,17 +33,20 @@ end
   def set_notifications_admin
     @notifications = Notification.where( user_id: current_user.id ).order(created_at: :desc).limit(7)
     @notifications_array = @notifications.select { |notification| notification }
-    @new_notifications_array = @notifications.where( seen: false ).select(:description)
-    @notifications_descriptions_array = @notifications.where( seen: false ).select(:userdescription)
+    @new_notifications_array = @notifications.where( seen: false )
+    @notifications_descriptions_array = @notifications.where( seen: false ).select(:description).as_json
+    @notifications_descriptions_array = @notifications_descriptions_array.map {|arr| arr["description"]}
   end
 
 
 #setting notifications for normal user
   def set_notifications_user
+    @notifications_descriptions_array = Array.new
     @notifications = Notification.where( sender_id: current_user.id ).order(created_at: :desc).limit(7) 
     @notifications_array = @notifications.select { |notification| notification }
     @new_notifications_array = @notifications.where( seen: false )
-    @notifications_descriptions_array = @notifications.where( seen: false ).select(:userdescription)
+    @notifications_descriptions_array = @notifications.where( seen: false ).select(:userdescription).as_json
+    @notifications_descriptions_array = @notifications_descriptions_array.map {|arr| arr["userdescription"]}
   end
 
 #set notification variable

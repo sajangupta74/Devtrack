@@ -137,8 +137,8 @@
             <li>
               <a href="javascript:void(0)">
                 <span class="label label-primary"><i class="fa fa-user"></i></span>
-                <span class="message"> <%= @notifications_array[i].userdescription.length > 26 ? 
-                "#{@notifications_array[i].userdescription[0...23]}..." : @notifications_array[i].userdescription %></span>
+                <span class="message"> <%= @notifications_descriptions_array[i].length > 26 ? 
+                "#{@notifications_descriptions_array[i][0...20]}..." : @notifications_descriptions_array[i] %></span>
                 <span class="time"> <%= ((Time.now-@notifications_array[i].created_at)/(60)).round > 59 ? 
                  ((Time.now-@notifications_array[i].created_at)/(60*60)).round > 24 ? "More than a day ago" : "#{((Time.now-@notifications_array[i].created_at)/(60*60)).round} hr ago"  :  "#{((Time.now-@notifications_array[i].created_at)/(60)).round} min ago"   %> </span>
               </a>
