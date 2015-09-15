@@ -9,6 +9,6 @@ Rails.application.config.assets.version = '1.0'
 
 Rails.application.config.assets.precompile += %w( .svg .eot .woff .ttf)
 
-%w( mainController devicesController user_infosController).each do |controller|
+%w( mainController devicesController user_infosController requestsController).each do |controller|
   Rails.application.config.assets.precompile += ["#{controller}.js", "#{controller}.css"]
 end

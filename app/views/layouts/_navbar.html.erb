@@ -41,32 +41,30 @@
             </li>
 
 
-
-            <li class="<%= controller.controller_name == "devices" ? "active open" : "" %>" >
+            <% if current_user.is_admin == 1 %>
+            <li class="<%= controller.controller_name == "requests" ? "active open" : "" %>" >
             
               <a href="javascript:void(0)"><i class="clip-screen"></i>
                 <span class="title"> Requests </span><i class="icon-arrow"></i>
                 <span class="selected"></span>                
               </a>
               <ul class="sub-menu">
-                <li class="<%= (controller.controller_name == "devices" && controller.action_name == "index") ? "active open" : "" %>">                  
-                  <a href= '<%= devices_path %>'><i class="clip-list"></i>
+                <li class="<%= (controller.controller_name == "requests" && controller.action_name == "inqueue") ? "active open" : "" %>">                  
+                  <a href= '<%= inqueue_requests_path %>'><i class="clip-list"></i>
                     <span class="title"> In Queue </span>
                   </a>              
                 </li>
 
     <!-- Hide create devices link for normal user -->
-                <% if current_user.is_admin == 1 %>
-                <li>
-                  <a href="<%= new_device_path %>"><i class="clip-spinner-2"></i>
+                <li class="<%= (controller.controller_name == "requests" && controller.action_name == "completed") ? "active open" : "" %>">
+                  <a href="<%= completed_requests_path %>"><i class="clip-spinner-2"></i>
                     <span class="title"> Completed Requests </span>
                   </a>
                 </li>     
-                <% end %>
 
               </ul>
             </li>
-
+            <% end %>
 
           </ul>
           <!-- end: MAIN NAVIGATION MENU -->

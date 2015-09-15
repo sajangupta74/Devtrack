@@ -9,6 +9,10 @@ Rails.application.routes.draw do
 devise_for :users, controllers: { :omniauth_callbacks => "users/omniauth_callbacks",
                                   :devise_session => "users/sessions",
                                   :devise_registration => "users/registrations"}
+ 
+
+get '/requests/inqueue', to: 'requests#inqueue', as: 'inqueue_requests'
+get '/requests/completed', to: 'requests#completed', as: 'completed_requests'
 
 get '/index', to: 'main#index', as: 'main'
 post '/getdevice/:id', to: 'devices#get_device', as: 'getdevice'
