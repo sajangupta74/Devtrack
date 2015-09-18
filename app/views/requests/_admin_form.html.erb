@@ -32,14 +32,13 @@
 												</tr>
 											</thead>
 											<tbody>
-											<% @requests.each do |req| %>
+											<% current_user.admin_requests.each do |req| %>
 												<tr>													
 													<td>
-													<a href="#">
-														<%= UserInfo.find_by(user_id: req.sender_id).first_name %> <%= UserInfo.find_by(user_id: req.sender_id).last_name %>
-													</a></td>
-													<td><%= Device.find(req.device_id).name %></td>
-													<td><%= Device.find(req.device_id).slug %></td>
+														<%= User.find(req.reciever_id).userinfo.first_name + " " + User.find(req.reciever_id).userinfo.last_name %>
+													</td>
+													<td><%= req.device.name %></td>
+													<td><%= req.device.slug %></td>
 													<td><button type="button" class="btn btn-blue btn-xs">
 											Extra small button
 										</button></td>

@@ -1,7 +1,7 @@
 class DevicesController < ApplicationController
 
-	before_action :authenticate_user!
-	load_and_authorize_resource
+	#before_action :authenticate_user!
+	#load_and_authorize_resource
 	layout "controller_layouts"
 	before_action :define
 
@@ -53,12 +53,15 @@ class DevicesController < ApplicationController
 		username=userinfo.first_name + " " + userinfo.last_name
 
 	#generating device request
-		request=Request.create(sender_id: current_user.id, reciever_id: 1, device_id: @device.id)
-
+		request=current_user.user_requests.create(reciever_id: 1, device_id: @device.id, status_id: 4)
+	
 	#generating notification
 		notification=Notification.create(request_id: request.id, user_id: 1, 
 			sender_id: current_user.id, description: "#{username} requested for #{@device.name}",
-			activity_type: 1, seen: false, open: false, userdescription: "You have requested #{@device.name}")
+			activity_id: 1, seen: false, open: false, userdescription: "You have requested #{@device.name}")
+		
+		request.notification = notification 	#association
+		device = params[:id]		#association
 
 		if ( request != nil && notification != nil )
 			respond_to do |format|

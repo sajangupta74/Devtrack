@@ -6,11 +6,15 @@ layout "controller_layouts"
 
 	def inqueue
 		@requests = Request.inqueue
-		render 'requests'
+		if current_user.is_admin == 1
+			render 'admin_requests'
+		else
+			render 'user_requests'
+		end
 	end
 
 	def completed
 		@requests = Request.completed
-		render 'requests'
+		render 'admin_requests'
 	end
 end

@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20150905081852) do
     t.integer  "user_id"
     t.integer  "sender_id"
     t.string   "description"
-    t.integer  "activity_type"
+    t.integer  "activity_id"
     t.integer  "request_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -72,13 +72,10 @@ ActiveRecord::Schema.define(version: 20150905081852) do
   create_table "requests", force: true do |t|
     t.integer  "sender_id"
     t.integer  "reciever_id"
-    t.boolean  "is_success"
-    t.boolean  "is_reject"
-    t.boolean  "is_on_hold"
+    t.integer  "status_id"
     t.integer  "device_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status"
   end
 
   create_table "statuses", force: true do |t|
