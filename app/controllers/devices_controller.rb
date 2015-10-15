@@ -43,47 +43,10 @@ class DevicesController < ApplicationController
 	end
 
 
+	def show
+		@device = Device.find(params[:id])
 
-	def request_device
-
-		id=params[:id]
-		@device = Device.find(id)
-
-		userinfo=UserInfo.find_by(user_id: current_user.id)
-		username=userinfo.first_name + " " + userinfo.last_name
-
-	#generating device request
-		request=current_user.user_requests.create(reciever_id: 1, device_id: @device.id, status_id: 4)
-	
-	#generating notification
-		notification=Notification.create(request_id: request.id, user_id: 1, 
-			sender_id: current_user.id, description: "#{username} requested for #{@device.name}",
-			activity_id: 1, seen: false, open: false, userdescription: "You have requested #{@device.name}")
-		
-		request.notification = notification 	#association
-		device = params[:id]		#association
-
-		if ( request != nil && notification != nil )
-			respond_to do |format|
-				@device.update(status_id: 4)
-		    	format.json {render json: {"message" => "success"} }
-		    	devices_path
-			end
-		else
-			respond_to do |format|
-		    	format.json {render json: {"message" => "fail"} }
-		    	devices_path
-			end
-		end
-	end
-
-
-
-	  def get_device
-	    id=params[:id]
-	    puts params.inspect
-	    @device=Device.find(id)
-	    if @device != nil
+		if @device != nil
 	    	case @device.status_id
 	    		when 1
 	    			respond_to do |format|
@@ -103,7 +66,83 @@ class DevicesController < ApplicationController
 		      		end
 		     end
 	    end
-	  end
+	end
+	
+
+	def new
+		@device = Device.new
+	end
+
+
+
+	def create
+		@device = Device.new(device_params)
+		@device.update(status_id: 1)
+		@device.update(owner: current_user.id)
+		flash[:notice] = "Device was successfully created." if @device.save
+		redirect_to devices_path
+	end
+
+
+
+	def edit
+	end
+
+
+
+	def update
+		flash[:notice] = "Device was successfully updated." if @device.update(device_params)
+	end
+
+
+
+	def destroy
+		flash[:notice] = "Device was successfully deleted." if @device.destroy
+	end
+
+
+
+	def req
+
+		id=params[:id]
+		puts "DEVICE ID #{id}"
+
+		@device = Device.find(id)
+
+		userinfo=UserInfo.find_by(user_id: current_user.id)
+		if userinfo == nil
+			username = "New User"
+		else
+			username=userinfo.first_name + " " + userinfo.last_name
+		end
+
+
+	#generating device request
+		request=current_user.user_requests.create(reciever_id: @device.owner, device_id: @device.id, status_id: 4)
+	
+	#generating notification
+		notification=Notification.create(request_id: request.id, user_id: @device.owner, 
+			sender_id: current_user.id, description: "#{username} requested for #{@device.name}",
+			activity_id: 1, seen: false, open: false, userdescription: "You have requested #{@device.name}")
+		
+		request.notification = notification 	#has_one association
+		device = params[:id]		#has_one association
+
+		if ( request != nil && notification != nil )
+			respond_to do |format|
+				@device.update(status_id: 4)
+		    	format.json {render json: {"message" => "success"} }
+		    	devices_path
+			end
+		else
+			respond_to do |format|
+		    	format.json {render json: {"message" => "fail"} }
+		    	devices_path
+			end
+		end
+	end
+
+
 
 
 
@@ -126,41 +165,6 @@ class DevicesController < ApplicationController
 	    end
 	  end
 
-
-	def show 		
-	end
-
-
-
-	def new
-		@device = Device.new
-	end
-
-
-
-	def create
-		@device = Device.new(device_params)
-		@device.update(status_id: 1)
-		flash[:notice] = "Device was successfully created." if @device.save
-		redirect_to devices_path
-	end
-
-
-
-	def edit
-	end
-
-
-
-	def update
-		flash[:notice] = "Device was successfully updated." if @device.update(device_params)
-	end
-
-
-
-	def destroy
-		flash[:notice] = "Device was successfully deleted." if @device.destroy
-	end
 
 
 

@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :devicequeues
   has_many :devices, through: :devicequeues
+  has_many :deviceOwner, class_name: "Device"
   has_one  :userinfo, class_name: "UserInfo"
   has_many :admin_requests, foreign_key: :reciever_id, class_name: "Request"
   has_many :user_requests, foreign_key: :sender_id, class_name: "Request"

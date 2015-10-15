@@ -10,11 +10,11 @@
 			$.ajax(
 
 				{
-					url: '/getdevice/'+device_id,
+					url: '/devices/'+device_id,
 
 					data: { id: device_id },
 
-					type: "POST",
+					type: "GET",
 
 					datatype: "json",
 
@@ -57,7 +57,7 @@
 		$.ajax(
 
 			{
-				url: '/requestdevice/'+device_id,
+				url: '/devices/'+device_id+'/req',
 
 				type: "POST",
 
