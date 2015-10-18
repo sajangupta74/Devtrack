@@ -12,6 +12,9 @@
             <li class="<%= controller.controller_name == "main" ? "active open" : "" %>">                              
                 <%= link_to '<i class="clip-home-3"></i> Dashboard'.html_safe, main_path, :class => (controller.controller_name == "main" ? "selected" : "") %>                 
             </li>
+
+
+
             <li class="<%= controller.controller_name == "devices" ? "active open" : "" %>" >
             
               <a href="javascript:void(0)"><i class="clip-screen"></i>
@@ -24,19 +27,23 @@
                     <span class="title"> Devices List </span>
                   </a>              
                 </li>
+
+    <!-- Hide create devices link for normal user -->
+                <% if current_user.is_admin == 1 %>
                 <li>
                   <a href="<%= new_device_path %>"><i class="clip-spinner-2"></i>
                     <span class="title"> Create Devices </span>
                   </a>
-                </li>                
+                </li>     
+                <% end %>
+
               </ul>
             </li>
-            <li>
-              <a href="../../frontend/clip-one/index.html" target="_blank"><i class="clip-cursor"></i>
-                <span class="title"> Frontend Theme </span><span class="selected"></span>
-              </a>
-            </li>
+
+
           </ul>
           <!-- end: MAIN NAVIGATION MENU -->
         </div>
+        </div>
+
         <!-- end: SIDEBAR -->

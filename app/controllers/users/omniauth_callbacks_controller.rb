@@ -7,10 +7,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # end
 
   def google_oauth2
-   # render 'users/sessions/new'
-    render template: 'index'
     @user = User.from_google_auth(request.env["omniauth.auth"])
-    session[:user] = @user
+    sign_in_and_redirect @user
   end
 
   # More info at:
@@ -23,8 +21,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   # GET|POST /users/auth/twitter/callback
    def failure
-     #super
-     render 'index'
+     super
    end
 
   # protected

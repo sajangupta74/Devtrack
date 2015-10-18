@@ -11,7 +11,7 @@
   <!-- end: RESPONSIVE MENU TOGGLER -->
   <!-- start: LOGO -->
   <a class="navbar-brand" href="index.html">
-    CLIP<i class="clip-clip"></i>ONE
+    Dev<i class="fa-laptop"></i>Track
   </a>
   <!-- end: LOGO -->
 </div>
@@ -268,7 +268,7 @@
                   <img alt="" src="./assets/images/avatar-1.jpg">
                 </div>
                 <div class="thread-content">
-                  <span class="author">Peter Clark</span>
+                  <span class="author"><%= @username %></span>
                   <span class="preview">Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</span>
                   <span class="time">2 mins</span>
                 </div>
@@ -332,26 +332,12 @@
 <li class="dropdown current-user">
   <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
     <img src="assets/images/avatar-1-small.jpg" class="circle-img" alt="">
-    <span class="username">Peter Clark</span>
+    <span class="username"><%= @username %></span>
     <i class="clip-chevron-down"></i>
   </a>
   <ul class="dropdown-menu">
     <li>
-      <a href="pages_user_profile.html">
-        <i class="clip-user-2"></i>
-        &nbsp;My Profile
-      </a>
-    </li>
-    <li>
-      <a href="pages_calendar.html">
-        <i class="clip-calendar"></i>
-        &nbsp;My Calendar
-      </a>
-    <li>
-      <a href="pages_messages.html">
-        <i class="clip-bubble-4"></i>
-        &nbsp;My Messages (3)
-      </a>
+      <%= link_to " My Profile", edit_user_info_path, class: "clip-user-2" %>
     </li>
     <li class="divider"></li>
     <li>
@@ -359,10 +345,7 @@
         &nbsp;Lock Screen </a>
     </li>
     <li>
-      <a href="login_example1.html">
-        <i class="clip-exit"></i>
-        &nbsp;Log Out
-      </a>
+    <%= link_to " Log Out", destroy_user_session_path, method: :delete, class:  "clip-exit" %>
     </li>
   </ul>
 </li>

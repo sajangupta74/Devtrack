@@ -12,3 +12,6 @@
 //= require jquery.cookie.js
 //= require bootstrap-colorpalette.js
 //= require main.js
+//= require bootstrap-modal.js
+//= require bootstrap-modalmanager.js
+//= require ui-modals.js

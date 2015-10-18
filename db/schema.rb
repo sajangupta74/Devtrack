@@ -11,12 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150707072508) do
+ActiveRecord::Schema.define(version: 20150814081703) do
+
+  create_table "activities", force: true do |t|
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "device_queues", force: true do |t|
     t.integer  "device_id"
     t.integer  "user_id"
-    t.string   "time"
+    t.datetime "time"
+    t.datetime "return_time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -31,7 +38,17 @@ ActiveRecord::Schema.define(version: 20150707072508) do
     t.string   "name"
     t.string   "device_type"
     t.string   "slug"
-    t.string   "status_id"
+    t.integer  "status_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "notifications", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "sender_id"
+    t.string   "description"
+    t.integer  "activity_type"
+    t.integer  "request_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -43,8 +60,36 @@ ActiveRecord::Schema.define(version: 20150707072508) do
     t.datetime "updated_at"
   end
 
+  create_table "requests", force: true do |t|
+    t.integer  "sender_id"
+    t.integer  "reciever_id"
+    t.boolean  "is_success"
+    t.boolean  "is_reject"
+    t.boolean  "is_on_hold"
+    t.integer  "device_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "statuses", force: true do |t|
     t.string   "status_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_infos", force: true do |t|
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.date     "dob"
+    t.binary   "image",       limit: 16777215
+    t.string   "image_name"
+    t.string   "department"
+    t.string   "designation"
+    t.integer  "phone"
+    t.string   "gender"
+    t.string   "city"
+    t.integer  "zipcode"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

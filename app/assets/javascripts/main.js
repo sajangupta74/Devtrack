@@ -238,8 +238,10 @@ var Main = function () {
                 if (!$(this).parent().hasClass('open')) {
                     $(this).parent().addClass('open');
                     $(this).parent().parent().children('li.open').not($(this).parent()).not($('.main-navigation-menu > li.active')).removeClass('open').children('ul').slideUp(200);
+                    
                     $(this).parent().children('ul').slideDown(200, function () {
                         runContainerHeight();
+                        $(this).css("display","block")
                     });
                 } else {
                     if (!$(this).parent().hasClass('active')) {

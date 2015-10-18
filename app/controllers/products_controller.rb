@@ -1,17 +1,16 @@
 class ProductsController < ApplicationController
+  
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
     load_and_authorize_resource only: [:new, :create, :update, :destroy, :edit]
     load_and_authorize_resource except: [:index, :show]
-  respond_to :html
+  respond_to :html, :js
 
   def index
     @products = Product.all
-    respond_with(@products)
   end
 
   def show
-    respond_with(@product)
   end
 
   def new
@@ -23,12 +22,9 @@ class ProductsController < ApplicationController
   end
 
   def create
-
-@product = Product.new(product_params)
+    @product = Product.new(product_params)
     flash[:notice] = 'Product was successfully created.' if @product.save
     respond_with(@product)
-
-  puts params[:product].inspect
   end
 
   def update
@@ -37,8 +33,16 @@ class ProductsController < ApplicationController
   end
 
   def destroy
+    puts "Start Destroy"
     @product.destroy
-    respond_with(@product)
+    @products = Product.all
+    @product = Product.last
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+    puts "END DESTROY"
   end
 
   private

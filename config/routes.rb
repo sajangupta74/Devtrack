@@ -11,8 +11,19 @@ devise_for :users, controllers: { :omniauth_callbacks => "users/omniauth_callbac
                                   :devise_registration => "users/registrations"}
 
 get '/index', to: 'main#index', as: 'main'
+post '/getdevice/:id', to: 'devices#get_device', as: 'getdevice'
+post '/assigndevice/:id', to: 'devices#assign_device', as: 'assigndevice'
+post '/requestdevice/:id', to: 'devices#request_device', as: 'requestdevice'
+
+#get '/users/info', to: 'user_info#overview', as: 'userinfo'
+#post '/users/update', to: 'user_info#update', as: 'update_userinfo'
+get '/users/getimage', to: 'user_info#send_image', as: 'image'
+
+resource :user_info, path: '/user/info', except: [:index, :destroy]
 
 mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
+
 
   #get '/index', to: 'main#index2'
 
@@ -20,7 +31,7 @@ mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'main#index'
+   root 'main#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

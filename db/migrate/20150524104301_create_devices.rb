@@ -4,7 +4,7 @@ class CreateDevices < ActiveRecord::Migration
       t.string :name
       t.string :device_type
       t.string :slug
-      t.string :status_id
+      t.integer :status_id
 
       t.timestamps
     end

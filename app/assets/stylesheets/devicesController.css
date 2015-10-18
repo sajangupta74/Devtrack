@@ -15,11 +15,10 @@
  *= require "style.css"
  *= require "main.css"
  *= require "main-responsive.css"
- *= require "all.css"
  *= require "bootstrap-colorpalette.css"
  *= require "perfect-scrollbar.css"
  *= require "theme_light.css"
- 
  *= require "fullcalendar.css"
-
+ *= require "bootstrap-modal-bs3patch.css"
+ *= require "bootstrap-modal.css"
  */
