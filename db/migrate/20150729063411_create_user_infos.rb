@@ -9,7 +9,7 @@ class CreateUserInfos < ActiveRecord::Migration
       t.string  :image_name
       t.string  :department
       t.string  :designation
-      t.integer :phone
+      t.integer :phone, limit: 8
       t.string  :gender
       t.string  :city
       t.integer :zipcode

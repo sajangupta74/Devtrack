@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150814081703) do
+ActiveRecord::Schema.define(version: 20151012102527) do
 
   create_table "activities", force: true do |t|
     t.string   "description"
@@ -41,16 +41,20 @@ ActiveRecord::Schema.define(version: 20150814081703) do
     t.integer  "status_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "owner"
   end
 
   create_table "notifications", force: true do |t|
     t.integer  "user_id"
     t.integer  "sender_id"
     t.string   "description"
-    t.integer  "activity_type"
+    t.integer  "activity_id"
     t.integer  "request_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "seen"
+    t.boolean  "open"
+    t.string   "userdescription"
   end
 
   create_table "products", force: true do |t|
@@ -60,12 +64,16 @@ ActiveRecord::Schema.define(version: 20150814081703) do
     t.datetime "updated_at"
   end
 
+  create_table "request_statuses", force: true do |t|
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "requests", force: true do |t|
     t.integer  "sender_id"
     t.integer  "reciever_id"
-    t.boolean  "is_success"
-    t.boolean  "is_reject"
-    t.boolean  "is_on_hold"
+    t.integer  "status_id"
     t.integer  "device_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -86,7 +94,7 @@ ActiveRecord::Schema.define(version: 20150814081703) do
     t.string   "image_name"
     t.string   "department"
     t.string   "designation"
-    t.integer  "phone"
+    t.integer  "phone",       limit: 8
     t.string   "gender"
     t.string   "city"
     t.integer  "zipcode"

@@ -2,21 +2,24 @@ Rails.application.routes.draw do
 
 
 
-  resources :devices
+  resources :devices do
+    post 'req', on: :member
+  end
 
   resources :products
 
-devise_for :users, controllers: { :omniauth_callbacks => "users/omniauth_callbacks",
+  devise_for :users, controllers: { :omniauth_callbacks => "users/omniauth_callbacks",
                                   :devise_session => "users/sessions",
                                   :devise_registration => "users/registrations"}
+ 
+
+get '/requests/inqueue', to: 'requests#inqueue', as: 'inqueue_requests'
+get '/requests/completed', to: 'requests#completed', as: 'completed_requests'
 
 get '/index', to: 'main#index', as: 'main'
-post '/getdevice/:id', to: 'devices#get_device', as: 'getdevice'
-post '/assigndevice/:id', to: 'devices#assign_device', as: 'assigndevice'
-post '/requestdevice/:id', to: 'devices#request_device', as: 'requestdevice'
 
-#get '/users/info', to: 'user_info#overview', as: 'userinfo'
-#post '/users/update', to: 'user_info#update', as: 'update_userinfo'
+post '/getdevice/:id', to: 'devices#get_device', as: 'getdevice'
+
 get '/users/getimage', to: 'user_info#send_image', as: 'image'
 
 resource :user_info, path: '/user/info', except: [:index, :destroy]

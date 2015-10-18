@@ -1,0 +1,52 @@
+<div class="panel panel-default">
+								<div class="panel-heading">
+									<i class="fa fa-external-link-square"></i>
+									In Queue Requests									<div class="panel-tools">
+										<a class="btn btn-xs btn-link panel-collapse collapses" href="#">
+										</a>
+										<a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal">
+											<i class="fa fa-wrench"></i>
+										</a>
+										<a class="btn btn-xs btn-link panel-refresh" href="#">
+											<i class="fa fa-refresh"></i>
+										</a>
+										<a class="btn btn-xs btn-link panel-expand" href="#">
+											<i class="fa fa-resize-full"></i>
+										</a>
+										<a class="btn btn-xs btn-link panel-close" href="#">
+											<i class="fa fa-times"></i>
+										</a>
+									</div>
+								</div>
+								<div class="panel-body">
+									<div class="table-responsive">
+										<table class="table table-bordered table-hover" id="sample-table-1">
+											<thead>
+												<tr>
+													
+													<th>Requested Person</th>
+													<th>Device</th>
+													<th>Device Slug</th>
+													<th><i class="fa fa-time"></i> Action </th>
+													<th>Status</th>
+												</tr>
+											</thead>
+											<tbody>
+											<% current_user.admin_requests.each do |req| %>
+												<tr>													
+													<td>
+														<%= User.find(req.reciever_id).userinfo.first_name + " " + User.find(req.reciever_id).userinfo.last_name %>
+													</td>
+													<td><%= req.device.name %></td>
+													<td><%= req.device.slug %></td>
+													<td><button type="button" class="btn btn-blue btn-xs">
+											Extra small button
+										</button></td>
+													<td><span class="label label-sm label-warning">Act</span></td>
+												</tr>
+												<% end %>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>

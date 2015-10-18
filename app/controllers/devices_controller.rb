@@ -1,64 +1,148 @@
 class DevicesController < ApplicationController
 
-	before_action :authenticate_user!
-	load_and_authorize_resource
+	#before_action :authenticate_user!
+	#load_and_authorize_resource
 	layout "controller_layouts"
 	before_action :define
-	respond_to :html, :json, :js
+
 
 	def index
 		@devices=Device.all
 		@devices_users=User.joins(:DeviceQueue)
 		@assign_devices=DeviceQueue.all
 		@current_user=current_user
+
+		requests = Request.all 				#getting all requested devices
+
+		@requested_devices_info = {}		#contains all information of the device which is requested 
+											#by the users {device_id, sender_id, sender_name}
+
+		requested_devices = Array.new		#Array of all of the devices, which are requested
+
+		if requests != nil						#if single device has been requested
+			requests.each do |request| 
+				requested_devices << request
+			end
+			i=1;
+			requests.length.times do
+				device_id = requested_devices[i-1].device_id
+				sender_id = requested_devices[i-1].sender_id
+				userinfo = UserInfo.find_by(user_id: sender_id)
+				username = userinfo.first_name + " " + userinfo.last_name
+				
+				@requested_devices_info["device_id_#{requested_devices[i-1].device_id}"] = {
+						device_id: device_id,
+						sender_id: sender_id,
+						username: username
+				}
+				i = i+1
+			end
+		else							# if no device has been  requested
+			@requested_devices = nil
+		end
+	end
+
+
+	def show
+		@device = Device.find(params[:id])
+
+		if @device != nil
+	    	case @device.status_id
+	    		when 1
+	    			respond_to do |format|
+		        		format.json {render json: { "data" => @device, "message" => "available" } }		        
+		      		end
+		      	when 2
+		      		respond_to do |format|
+		        		format.json {render json: { "data" => @device, "message" => "not available" } }		        
+		      		end
+		      	when 3
+		      		respond_to do |format|
+		        		format.json {render json: {"message" => "using"} }
+		      		end
+		      	when 4
+		      		respond_to do |format|
+		        		format.json {render json: {"message" => "requested"} }
+		      		end
+		     end
+	    end
+	end
+	
+
+	def new
+		@device = Device.new
 	end
 
 
 
-	def request_device
+	def create
+		@device = Device.new(device_params)
+		@device.update(status_id: 1)
+		@device.update(owner: current_user.id)
+		flash[:notice] = "Device was successfully created." if @device.save
+		redirect_to devices_path
+	end
+
+
+
+	def edit
+	end
+
+
+
+	def update
+		flash[:notice] = "Device was successfully updated." if @device.update(device_params)
+	end
+
+
+
+	def destroy
+		flash[:notice] = "Device was successfully deleted." if @device.destroy
+	end
+
+
+
+	def req
+
 		id=params[:id]
+		puts "DEVICE ID #{id}"
+
 		@device = Device.find(id)
 
 		userinfo=UserInfo.find_by(user_id: current_user.id)
-		username=userinfo.first_name + " " + userinfo.last_name
+		if userinfo == nil
+			username = "New User"
+		else
+			username=userinfo.first_name + " " + userinfo.last_name
+		end
+
 
 	#generating device request
-		request=Request.create(sender_id: current_user.id, reciever_id: 1, device_id: @device)
-
+		request=current_user.user_requests.create(reciever_id: @device.owner, device_id: @device.id, status_id: 4)
+	
 	#generating notification
-		notification=Notification.create(request_id: request.id, user_id: 1, 
+		notification=Notification.create(request_id: request.id, user_id: @device.owner, 
 			sender_id: current_user.id, description: "#{username} requested for #{@device.name}",
-			activity_type: 1)
+			activity_id: 1, seen: false, open: false, userdescription: "You have requested #{@device.name}")
+		
+		request.notification = notification 	#has_one association
+		device = params[:id]		#has_one association
 
 		if ( request != nil && notification != nil )
 			respond_to do |format|
+				@device.update(status_id: 4)
 		    	format.json {render json: {"message" => "success"} }
+		    	devices_path
 			end
 		else
 			respond_to do |format|
 		    	format.json {render json: {"message" => "fail"} }
+		    	devices_path
 			end
 		end
 	end
 
 
-
-	  def get_device
-	    id=params[:id]
-	    puts params.inspect
-	    @device=Device.find(id)
-	    if @device != nil
-	    	if @device.status_id === 1
-		      respond_to do |format|
-		        format.json {render json: { "data" => @device, "message" => "success" } }
-		      end
-		  	else
-		  	  respond_to do |format|
-		        format.json {render json: {"message" => "Device already in use"} }
-		      end
-		  	end
-	    end
-	  end
 
 
 
@@ -81,41 +165,6 @@ class DevicesController < ApplicationController
 	    end
 	  end
 
-
-	def show 		
-	end
-
-
-
-	def new
-		@device = Device.new
-	end
-
-
-
-	def create
-		@device = Device.new(device_params)
-		@device.update(status_id: 1)
-		flash[:notice] = "Device was successfully created." if @device.save
-		redirect_to devices_path
-	end
-
-
-
-	def edit
-	end
-
-
-
-	def update
-		flash[:notice] = "Device was successfully updated." if @device.update(device_params)
-	end
-
-
-
-	def destroy
-		flash[:notice] = "Device was successfully deleted." if @device.destroy
-	end
 
 
 

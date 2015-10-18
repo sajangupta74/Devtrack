@@ -4,8 +4,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, 
   :trackable, :validatable, :omniauthable
 
-  has_many :DeviceQueue
-  has_one :UserInfo
+  has_many :devicequeues
+  has_many :devices, through: :devicequeues
+  has_many :deviceOwner, class_name: "Device"
+  has_one  :userinfo, class_name: "UserInfo"
+  has_many :admin_requests, foreign_key: :reciever_id, class_name: "Request"
+  has_many :user_requests, foreign_key: :sender_id, class_name: "Request"
+  has_many :notifications
 
   def self.user_info(auth,user_id)
 

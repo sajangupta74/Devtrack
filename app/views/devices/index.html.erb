@@ -89,8 +89,16 @@
 
 																<% if d.status_id == 1 %>
 																	<%= "Admin" %>
-																	<% elsif d.status_id == 3 %>
+																<% elsif d.status_id == 3 %>
 																	<% user_id=DeviceQueue.find_by(device_id: d.id).user_id %>
+																	<% if user_id == @current_user.id %>
+																		<%= "Current User" %>
+																	<% else %>
+																		<% email=User.find(user_id).email %>
+																		<%= email %>
+																	<% end %>
+																<% elsif d.status_id == 4 %>
+																	<% user_id = Request.find_by(device_id: d.id).sender_id %>
 																	<% if user_id == @current_user.id %>
 																		<%= "Current User" %>
 																	<% else %>
@@ -101,12 +109,14 @@
 															</td>
 															<td><%= d.slug %></td>
 															<td class="center" id="tag_id_<%=d.id%>">
-															<% if d.status_id == 1 %>
-															<span class="label label-sm label-success" >Available</span>
+															<% if d.status_id == 1 %>			
+																<span class="label label-sm label-success" >Available</span>
 															<% elsif d.status_id == 2 %>
 															<span class="label label-sm label-inverse" >Un-available</span>
-															<% else %>
+															<% elsif d.status_id == 3 %>
 															<span class="label label-sm label-danger" >Using</span>
+															<% else %>
+															<span class="label label-sm label-inverse" >Requested</span>
 															<% end %>
 															</td>		
 															</tr>

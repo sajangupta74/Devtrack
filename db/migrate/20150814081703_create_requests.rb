@@ -3,9 +3,7 @@ class CreateRequests < ActiveRecord::Migration
     create_table :requests do |t|
       t.integer :sender_id
       t.integer :reciever_id
-      t.boolean :is_success
-      t.boolean :is_reject
-      t.boolean :is_on_hold
+      t.integer :status_id
       t.integer :device_id
 
       t.timestamps

@@ -22,6 +22,7 @@ class Ability
         elsif user.is_admin == 0
             can [:index, :get_device, :assign_device, :show, :request_device], Device
             can :manage, UserInfo
+            can [:inqueue], Request
         end
 
 
