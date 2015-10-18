@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
 # Use mysql as the database for Active Record
-gem 'mysql2'
+gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 
@@ -52,7 +52,12 @@ group :development do
   gem 'quiet_assets'
 end
 
+group :production do
+	gem 'rails_12factor'
+end
+
 gem "binding_of_caller"
 
 gem 'rails_admin', '~> 0.6.7'
 gem 'cancan'
+gem 'ruby', '~> 2.2.0'
