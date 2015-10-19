@@ -60,3 +60,4 @@ gem "binding_of_caller"
 
 gem 'rails_admin', '~> 0.6.7'
 gem 'cancan'
+ruby "2.2.0"
