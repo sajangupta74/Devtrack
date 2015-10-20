@@ -10,7 +10,7 @@ gem 'sass-rails', '~> 4.0.3'
 
 gem "twitter-bootstrap-rails"
 gem 'font-awesome-rails'
-gem 'bootstrap'
+#gem 'bootstrap'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
